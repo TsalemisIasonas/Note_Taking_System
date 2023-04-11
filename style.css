@@ -109,6 +109,12 @@ body {
     box-shadow: 0 2px 4px rgba(255, 255, 255, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
+.image_seperator {
+    width: 90%;
+    position: absolute;
+    left: 5%;
+    border-color: #e00;
+}
 .side-menu h2 {
     text-align: start;
     padding: 10px;
