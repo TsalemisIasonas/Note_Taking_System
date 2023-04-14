@@ -1,78 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./images/owl_logo.ico">
     <title>Note Taking System</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,100&display=swap" rel="stylesheet" />
-    <script src="script.js" defer></script>
-    
+    <link rel="stylesheet" href = 'styles.css'>
 </head>
-
 <body>
-    <nav class="top-nav">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
     
+    <header id="main-header"></header>
 
-    <div class="side-menu">
-        <div id="image_container">
-            <img id='logo' src="./images/owl_logo.jpg" alt="Logo">
-        </div>
-        <hr class = 'image_seperator'>
-        <div class="'options_container">
-            <h2>Dashboard</h2>
-            <ul>
-                <li><a href="#">Differential Equations</a></li>
-                <li><a href="#">Matterial Properties</a></li>
-                <li><a href="#">ProgTech</a></li>
-                <li><a href="#">Electromagnetic Fields</a></li>
-            </ul>
-        </div>
-        <button id="add_option_button">+</button>
-    </div>
-
+    <main id="main-contenr"></main>
     
-    <div id="header">
-        <canvas id="header-canvas"></canvas>
-        <script src="Flow.js"></script>
-        <h1 style="word-spacing: 30px;">Note Taking System</h1>
-    </div>
-    
+    <footer id="mainfooter"></footer>
 
-    <main id="dashboard">
-        <section id="tasks-list">
-            <div id="tasks">
-                <div class="task">
-                    <div class="content">
-                        <input type="text" class="text">
-                    </div>
-                    <div class="actions">
-                        <button class="edit">edit</button>
-                        <button class="delete">DEL</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-  
-    <footer id="myFooter" class="site-footer">
-        <div class="wrapper">
-          <p>Developed by H Mourh tou Avourh Coorporation</p>
-          <p>© 2021 All rights reserved.</p>
-        </div>
-    </footer>
-
+    <script src="script.js" defer></script>
 </body>
-
 </html>
