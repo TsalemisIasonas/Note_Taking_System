@@ -1,35 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./images/owl_logo.ico">
     <title>Note Taking System</title>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,100&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href = 'styles.css'>
-</head>
-<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-xqFh83+8KDFUaS5M5P/v2fvdKjEdfvZvt4AeU6AsOwJkZNcmrhpv87nJXKp9xYSxIe/CcYOdNCWLfan+KRKzw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <header id="main-header">
-        <button id="menu-toggle">Menu</button>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-xqFh83+8KDFUaS5M5P/v2fvdKjEdfvZvt4AeU6AsOwJkZNcmrhpv87nJXKp9xYSxIe/CcYOdNCWLfan+KRKzw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href='styles.css'>
+</head>
+
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <button id="show-menu"><i class="fa fa-bars fa-2x"></i></button>
+            <h1>Note Taking System</h1>
+        </div>
     </header>
 
-	<nav id="side-menu">
-		<ul>
-			<li><a href="#">Home</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Services</a></li>
-			<li><a href="#">Contact</a></li>
-		</ul>
-	</nav>
+    <div id="side-menu">
+        <div class="menu-header">
+            <button id="hide-menu"><i class="fas fa-bars fa-2x"></i></button>
+            <img id='logo' src="./images/owl_logo.jpg" alt="Logo">
+        </div>
+        <hr class = 'image-seperator'>
+        <div class="'options_container">
+            <h2>Dashboard</h2>
+            <ul>
+                <li><a href="#">Differential Equations</a></li>
+                <li><a href="#">Matterial Properties</a></li>
+                <li><a href="#">ProgTech</a></li>
+                <li><a href="#">Electromagnetic Fields</a></li>
+            </ul>
+        </div>
+        <button id="add_option_button">+</button>
+    </div>
 
-    <main id="main-content"></main>
-    
-    <footer id="main-footer"></footer>
+    <main class="main-content" class="shifted-right">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor metus ac velit lobortis, sit amet
+            aliquam risus rutrum. Pellentesque in elit vel justo blandit consequat. Fusce pharetra tellus ut risus
+            pulvinar, sit amet tempor enim pellentesque. Donec posuere euismod mi, nec scelerisque ipsum finibus vel.
+            Sed gravida lectus ut mauris imperdiet, eu sagittis nulla feugiat. Integer ultrices, mauris ac posuere
+            eleifend, eros nisl consequat nulla, a lacinia urna mi in leo.</p>
+    </main>
 
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
