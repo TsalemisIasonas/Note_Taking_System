@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     sideMenu.style.left = '0';
-    showMenuButton.classList.add('flip-button');
     mainContent.classList.add('shifted-right');
   });
   
@@ -11,11 +10,14 @@ const mainContent = document.getElementsByClassName('main-content')[0];
 
 showMenuButton.addEventListener('click', () => {
   sideMenu.style.left = '0';
-  showMenuButton.classList.add('flip-button');
-  mainContent.classList.add('shifted-right'); // add the new class to the main content
+  showMenuButton.classList.remove('flip-button');
+  hideMenuButton.classList.add('flip-button');
+  mainContent.classList.add('shifted-right'); 
 });
 
 hideMenuButton.addEventListener('click', () => {
-  sideMenu.style.left = '-205px';
-  mainContent.classList.remove('shifted-right'); // remove the class when hiding the menu
+  sideMenu.style.left = '-202px';
+  showMenuButton.classList.add('flip-button');
+  hideMenuButton.classList.remove('flip-button');
+  mainContent.classList.remove('shifted-right');
 });
