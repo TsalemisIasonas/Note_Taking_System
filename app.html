@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-xqFh83+8KDFUaS5M5P/v2fvdKjEdfvZvt4AeU6AsOwJkZNcmrhpv87nJXKp9xYSxIe/CcYOdNCWLfan+KRKzw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-yfQj+0iv+jF41hkpIZv88bgmWOI8X9zMnJGxXYLZoBMTZj2c1hAVeHwNK1VgjyqTtZZ9oNTRiLYmrRTlRzYRNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     <link rel="stylesheet" href='styles.css'>
 </head>
 
@@ -40,9 +43,9 @@
             <hr class='image-seperator'>
         </div>
 
-        <div class="options_container">
+        <div class="options-container">
             <h2>Dashboard</h2>
-            <ul>
+            <ul class="options-list">
                 <li><a href="#">Differential Equations</a></li>
                 <li><a href="#">Matterial Properties</a></li>
                 <li><a href="#">ProgTech</a></li>
@@ -52,20 +55,25 @@
         <button id="add_option_button">+</button>
     </div>
 
-    <main class="main-content" class="shifted-right">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce auctor metus ac velit lobortis, sit amet
-            aliquam risus rutrum. Pellentesque in elit vel justo blandit consequat. Fusce pharetra tellus ut risus
-            pulvinar, sit amet tempor enim pellentesque. Donec posuere euismod mi, nec scelerisque ipsum finibus vel.
-            Sed gravida lectus ut mauris imperdiet, eu sagittis nulla feugiat. Integer ultrices, mauris ac posuere
-            eleifend, eros nisl consequat nulla, a lacinia urna mi in leo.</p>
+    <main class="main-content">
 
+        <div class="accordion-container">
+            <button class="accordion">
+                <input class="accordion-input" type="text" placeholder="Title...">
+            </button>
+            <div class="panel">
+                <textarea class="panel-content" placeholder="Content..."></textarea>
+            </div>
+        </div>
 
+        <button id="add-accordion-button">+</button>
 
     </main>
 
     <footer id="my-footer">
         <div class="container">
             <p> Developed by H Mourh tou Avourh Coorporation</p>
+            <a href="https://github.com/TsalemisIasonas/Note_Taking_System" target="_blank"><i class="fab fa-github fa-2x" style="color: white;"></i></a>
         </div>
     </footer>
 

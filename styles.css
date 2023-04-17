@@ -22,6 +22,9 @@ header {
     position: relative;
     height: 200px;
     overflow: hidden;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(to right, #252525, #b00, #c00, #d00, #e00, red, red, #e00, #d00, #c00, #b00, #252525);
+    border-image-slice: 1;
 }
 
 .header-bg {
@@ -30,8 +33,8 @@ header {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('https://picsum.photos/id/10/1200/400');
-    background-size: cover;
+    /* background-image: url('https://picsum.photos/id/10/1200/400');
+    background-size: cover; */
     background-position: center;
     filter: brightness(0.9);
 }
@@ -39,7 +42,6 @@ header {
 .header-content {
     position: relative;
     z-index: 1;
-    /* make sure the content is placed on top of the background */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -90,8 +92,8 @@ header {
 .image-seperator {
     width: 90%;
     position: absolute;
-    top: 190px;
-    left: 5%;
+    top: 192px;
+    left: 4%;
     border-color: #e00;
 }
 
@@ -111,7 +113,7 @@ header {
 }
 
 #side-menu li {
-    border-top: 1px solid red;
+    border-top: 2px solid red;
     border-top-right-radius: 14px;
 }
 
@@ -156,6 +158,7 @@ header {
     transition: 0.3s;
 }
 
+/* Toggle Button Stiles*/
 
 #show-menu,
 #hide-menu {
@@ -172,13 +175,14 @@ header {
     left: 0;
 }
 
+/* Menu Animations*/
 
 .flip-button {
     position: relative;
     -webkit-animation-name: flip;
     animation-name: flip;
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
 }
 
 @-webkit-keyframes flip {
@@ -235,6 +239,8 @@ header {
     }
   }
 
+  /* Main Styles*/
+
 .main-content {
     margin-left: 20px;
     padding: 20px;
@@ -248,33 +254,101 @@ header {
     transition: margin-left 0.5s ease-in-out;
 }
 
+.accordion-container {
+    border: 2px solid white;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
 .accordion {
-    background-color: #eee;
-    color: #444;
+    background-color: transparent;
+    color: white;
+    font-size: 18px;
+    font-family: 'Exo 2';
+    font-weight: bold;
     cursor: pointer;
     padding: 18px;
     width: 100%;
     text-align: left;
     border: none;
     outline: none;
-    transition: 0.4s;
+    transition: 1s;
+    border-bottom: 2px solid white;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
   }
   
-  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
   .active, .accordion:hover {
-    background-color: #ccc;
+    background-color: #252525;
+  }
+
+  .accordion-input {
+    background-color: transparent;
+    color: white;
+    font-size: 18px;
+    font-family: 'Exo 2';
+    font-weight: bold;
+    border: none;
+    outline: none;
   }
   
-  /* Style the accordion panel. Note: hidden by default */
   .panel {
     padding: 0 18px;
-    background-color: white;
+    background-color: #252525;
+    color:white;
     display: none;
     overflow: hidden;
+
   }
 
+  .panel-content {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-family: 'Exo 2';
+    font-weight: bold;
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 150px;
+    margin-top: 10px;
+    
+  }
 
+  .accordion:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: white;
+    float:right;
+    margin-left: 5px;
+  }
+  
+  .active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+  }
 
+  #add-accordion-button{
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;    
+}
+
+#add-accordion-button:hover{
+    box-shadow: 0px 0px 30px rgba(255, 0, 0, 1);
+    transition: 0.3s;
+}
 
 footer {
     background-color: black;
@@ -285,8 +359,13 @@ footer {
     bottom: 0;
   }
 
-.container p {
-    text-align: center;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.container a {
+    background-color: black;
 }
 
 
