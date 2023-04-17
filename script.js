@@ -5,12 +5,10 @@ const mainContent = document.getElementsByClassName('main-content')[0];
 const footer = document.getElementById("my-footer");
 const addAccordionButton = document.getElementById("add-accordion-button");
 
-
 document.addEventListener('DOMContentLoaded', () => {
     sideMenu.style.left = '0';
     mainContent.classList.add('shifted-right');
     footer.style.display = 'none';
-
 });
 
 window.addEventListener("scroll", function () {
@@ -43,13 +41,7 @@ hideMenuButton.addEventListener('click', () => {
     mainContent.classList.remove('shifted-right');
 });
 
-
-
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
+function showPanel() {
     /* Toggle between adding and removing the "active" class,
     to highlight the button that controls the panel */
     this.classList.toggle("active");
@@ -61,16 +53,37 @@ for (i = 0; i < acc.length; i++) {
     } else {
       panel.style.display = "block";
     }
-  });
-} 
+}
+
+var accordionButtons = document.getElementsByClassName("accordion");
+for (var i = 0; i < accordionButtons.length; i++) {
+    accordionButtons[i].addEventListener("click", showPanel);
+}
+
+var deleteAccordionIcons = document.getElementsByClassName('delete-accordion', 'fas', 'fa-trash', 'fa-bounce');
+for (var i = 0; i< deleteAccordionIcons.length; i++) {
+    deleteAccordionIcons[i].addEventListener('click', function(e){
+        e.stopPropagation();
+        const container = e.target.parentNode.parentNode;
+        container.parentNode.removeChild(container);
+    })
+}
 
 addAccordionButton.addEventListener("click",function(){
     const accordionContainer = document.createElement('div');
     const accordionButton = document.createElement('button');
     const accordionTitle = document.createElement('input');
+    const deleteAccordionIcon = document.createElement('i');
     const accordionPanel = document.createElement('div');
     const accordionTextArea = document.createElement('textarea');
-    
+
+    deleteAccordionIcon.classList.add('delete-accordion', 'fas', 'fa-trash', 'fa-bounce');
+    deleteAccordionIcon.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const container = e.target.parentNode.parentNode;
+        container.parentNode.removeChild(container);
+    });
+
     accordionTitle.placeholder = 'Title...';
     accordionTextArea.placeholder = 'Content...';
 
@@ -79,13 +92,16 @@ addAccordionButton.addEventListener("click",function(){
     accordionTitle.classList.add('accordion-input');
     accordionPanel.classList.add('panel');
     accordionTextArea.classList.add('panel-content');
-    
-    
+
     mainContent.appendChild(accordionContainer);
     accordionContainer.appendChild(accordionButton);
-    accordionContainer.appendChild(accordionPanel);
     accordionButton.appendChild(accordionTitle);
+    accordionButton.appendChild(deleteAccordionIcon);
+    accordionContainer.appendChild(accordionPanel);
     accordionPanel.appendChild(accordionTextArea);
 
-})
-
+    var newAccordions = document.getElementsByClassName("accordion");
+    for (var i = 0; i < newAccordions.length; i++) {
+        newAccordions[i].addEventListener("click", showPanel);
+    }
+});
