@@ -18,8 +18,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-xqFh83+8KDFUaS5M5P/v2fvdKjEdfvZvt4AeU6AsOwJkZNcmrhpv87nJXKp9xYSxIe/CcYOdNCWLfan+KRKzw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-yfQj+0iv+jF41hkpIZv88bgmWOI8X9zMnJGxXYLZoBMTZj2c1hAVeHwNK1VgjyqTtZZ9oNTRiLYmrRTlRzYRNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-yfQj+0iv+jF41hkpIZv88bgmWOI8X9zMnJGxXYLZoBMTZj2c1hAVeHwNK1VgjyqTtZZ9oNTRiLYmrRTlRzYRNw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     <link rel="stylesheet" href='styles.css'>
 </head>
@@ -35,6 +37,13 @@
             <h1 style="letter-spacing: 2px;">Note Taking System</h1>
         </div>
     </header>
+
+    <div class="notes-menu">
+        <div class="notes-menu-elements">
+            <h2 id="notes-menu-header">My Notes</h2>
+        </div>
+    </div>
+    <button id="add-accordion-button">+</button>
 
     <div id="side-menu">
         <div class="menu-header">
@@ -55,26 +64,26 @@
         <button id="add_option_button">+</button>
     </div>
 
-    <main class="main-content">
+    <div class="main-content-container">
+        <main class="main-content">
 
-        <div class="accordion-container">
-            <button class="accordion">
-                <input class="accordion-input" type="text" placeholder="Title...">
-                <i class="delete-accordion fas fa-trash fa-bounce"></i>
-            </button>
-            <div class="panel">
-                <textarea class="panel-content" placeholder="Content..."></textarea>
+            <div class="accordion-container">
+                <button class="accordion">
+                    <input class="accordion-input" type="text" placeholder="Title...">
+                    <i class="delete-accordion fas fa-trash fa-bounce"></i>
+                </button>
+                <div class="panel">
+                    <textarea class="panel-content" placeholder="Content..."></textarea>
+                </div>
             </div>
-        </div>
-
-        <button id="add-accordion-button">+</button>
-
-    </main>
+        </main>
+    </div>
 
     <footer id="my-footer">
         <div class="container">
             <p> Developed by H Mourh tou Avourh Coorporation</p>
-            <a href="https://github.com/TsalemisIasonas/Note_Taking_System" target="_blank"><i class="fab fa-github fa-2x" style="color: white;"></i></a>
+            <a href="https://github.com/TsalemisIasonas/Note_Taking_System" target="_blank"><i
+                    class="fab fa-github fa-2x" style="color: white;"></i></a>
         </div>
     </footer>
 

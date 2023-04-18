@@ -2,25 +2,33 @@ const showMenuButton = document.getElementById('show-menu');
 const hideMenuButton = document.getElementById('hide-menu');
 const sideMenu = document.getElementById('side-menu');
 const mainContent = document.getElementsByClassName('main-content')[0];
+const mainMenu = document.getElementsByClassName('notes-menu')[0];
+const mainMenuElements = mainMenu.getElementsByClassName('notes-menu-elements')[0];
 const footer = document.getElementById("my-footer");
 const addAccordionButton = document.getElementById("add-accordion-button");
 
 document.addEventListener('DOMContentLoaded', () => {
     sideMenu.style.left = '0';
     mainContent.classList.add('shifted-right');
+    mainMenu.classList.add('shifted-right');
     footer.style.display = 'none';
 });
 
 window.addEventListener("scroll", function () {
-    if (window.pageYOffset > 500) {
+    if (window.pageYOffset > 1000) {
         footer.style.display = 'block';
         sideMenu.classList.add('fade-out-left');
         sideMenu.classList.remove('fade-in-right');
         mainContent.classList.remove('shifted-right');
+        mainMenu.classList.remove('shifted-right');
+        mainMenuElements.classList.add('fullscreen-width');
+
     } else {
         sideMenu.classList.add('fade-in-right');
         sideMenu.classList.remove('fade-out-left');
         mainContent.classList.add('shifted-right');
+        mainMenu.classList.add('shifted-right');
+        mainMenuElements.classList.remove('fullscreen-width');
         footer.style.display = 'none';
     }
 })
@@ -31,6 +39,8 @@ showMenuButton.addEventListener('click', () => {
     showMenuButton.classList.remove('flip-button');
     hideMenuButton.classList.add('flip-button');
     mainContent.classList.add('shifted-right');
+    mainMenu.classList.add('shifted-right');
+    mainMenuElements.classList.remove('fullscreen-width');
 });
 
 hideMenuButton.addEventListener('click', () => {
@@ -39,6 +49,8 @@ hideMenuButton.addEventListener('click', () => {
     showMenuButton.classList.add('flip-button');
     hideMenuButton.classList.remove('flip-button');
     mainContent.classList.remove('shifted-right');
+    mainMenu.classList.remove('shifted-right');
+    mainMenuElements.classList.add('fullscreen-width');
 });
 
 function showPanel() {
