@@ -1,1 +1,5 @@
-** linguist-vendored
+*linguist-detectable
+*.html linguist-language=html
+*.css linguist-language=css
+*.js linguist-language=javascript
+
