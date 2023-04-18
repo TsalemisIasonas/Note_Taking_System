@@ -1,13 +1,16 @@
-const showMenuButton = document.getElementById('show-menu');
-const hideMenuButton = document.getElementById('hide-menu');
-const sideMenu = document.getElementById('side-menu');
-const sideMenuList = sideMenu.getElementsByClassName('options-list');
-const mainContent = document.getElementsByClassName('main-content')[0];
-const mainMenu = document.getElementsByClassName('notes-menu')[0];
-const mainMenuElements = mainMenu.getElementsByClassName('notes-menu-elements')[0];
-const footer = document.getElementById("my-footer");
-const addOptionButton = document.getElementById('add_option_button');
-const addAccordionButton = document.getElementById("add-accordion-button");
+const showMenuButton = document.getElementById('show-menu'),
+      hideMenuButton = document.getElementById('hide-menu'),
+      sideMenu = document.getElementById('side-menu'),
+      sideMenuList = sideMenu.getElementsByClassName('options-list')[0],
+      mainContent = document.querySelector('.main-content'),
+      mainMenu = document.querySelector('.notes-menu'),
+      mainMenuElements = mainMenu.querySelector('.notes-menu-elements'),
+      footer = document.getElementById("my-footer"),
+      addOptionButton = document.getElementById('add_option_button'),
+      addAccordionButton = document.getElementById("add-accordion-button"),
+      accordionButtons = document.getElementsByClassName("accordion"),
+      deleteAccordionIcons = document.querySelectorAll('.delete-accordion, .fas, .fa-trash, .fa-bounce'),
+      categoryLinks = document.querySelectorAll('a[data-category]');
 
 document.addEventListener('DOMContentLoaded', () => {
     sideMenu.style.left = '0';
@@ -33,113 +36,98 @@ window.addEventListener("scroll", function () {
         mainMenuElements.classList.remove('fullscreen-width');
         footer.style.display = 'none';
     }
-})
+});
 
 showMenuButton.addEventListener('click', () => {
-    sideMenu.classList.add('fade-in-right');
-    sideMenu.classList.remove('fade-out-left');
-    showMenuButton.classList.remove('flip-button');
-    hideMenuButton.classList.add('flip-button');
-    mainContent.classList.add('shifted-right');
-    mainMenu.classList.add('shifted-right');
-    mainMenuElements.classList.remove('fullscreen-width');
+    showSideMenu(true);
 });
 
 hideMenuButton.addEventListener('click', () => {
-    sideMenu.classList.add('fade-out-left');
-    sideMenu.classList.remove('fade-in-right');
-    showMenuButton.classList.add('flip-button');
-    hideMenuButton.classList.remove('flip-button');
-    mainContent.classList.remove('shifted-right');
-    mainMenu.classList.remove('shifted-right');
-    mainMenuElements.classList.add('fullscreen-width');
+    showSideMenu(false);
 });
 
-addOptionButton.addEventListener('click',function(){
-    let optionsContainer = document.querySelector('.options-container');
-    let optionsList = document.querySelector('.options-list');
-    let newListItem = document.createElement('li');
-    let newCategory = document.createElement('a');
+function showSideMenu(show) {
+    const fadeClassIn = show ? 'fade-in-right' : 'fade-out-left';
+    const fadeClassOut = show ? 'fade-out-left' : 'fade-in-right';
+
+    sideMenu.classList.add(fadeClassIn);
+    sideMenu.classList.remove(fadeClassOut);
+    showMenuButton.classList.toggle('flip-button', !show);
+    hideMenuButton.classList.toggle('flip-button', show);
+    mainContent.classList.toggle('shifted-right', show);
+    mainMenu.classList.toggle('shifted-right', show);
+    mainMenuElements.classList.toggle('fullscreen-width', !show);
+}
+
+addOptionButton.addEventListener('click', addNewOption);
+
+function addNewOption() {
+    let optionsContainer = document.querySelector('.options-container'),
+        optionsList = document.querySelector('.options-list'),
+        newListItem = document.createElement('li'),
+        newCategory = document.createElement('a');
+
     newCategory.setAttribute('href','#');
     newCategory.setAttribute('data-category','New Option');
-    newCategory.innerHTML = 'New Option'
+    newCategory.textContent = 'New Option';
     newListItem.appendChild(newCategory);
-    optionsList.appendChild(newListItem);
+    optionsList.insertBefore(newListItem,optionsList.firstChild);
     optionsContainer.appendChild(optionsList);
-})
 
-
-
-function showPanel() {
-    /* Toggle between adding and removing the "active" class,
-    to highlight the button that controls the panel */
-    this.classList.toggle("active");
-
-    /* Toggle between hiding and showing the active panel */
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
+    accordionButtons.forEach(button => button.addEventListener("click", showPanel));
+    deleteAccordionIcons.forEach(icon => icon.addEventListener('click', deleteAccordion));
+    categoryLinks.forEach(link => link.addEventListener('click', selectCategory));
 }
 
-var accordionButtons = document.getElementsByClassName("accordion");
-for (var i = 0; i < accordionButtons.length; i++) {
-    accordionButtons[i].addEventListener("click", showPanel);
+function deleteAccordion(e) {
+    e.stopPropagation();
+    const container = e.target.closest('.accordion-container');
+    container.parentNode.removeChild(container);
 }
 
-var deleteAccordionIcons = document.getElementsByClassName('delete-accordion', 'fas', 'fa-trash', 'fa-bounce');
-for (var i = 0; i< deleteAccordionIcons.length; i++) {
-    deleteAccordionIcons[i].addEventListener('click', function(e){
-        e.stopPropagation();
-        const container = e.target.parentNode.parentNode;
-        container.parentNode.removeChild(container);
-    })
-}
-
-// categories
-var categoryLinks = document.querySelectorAll('a[data-category]');
-
-for (var i = 0; i < categoryLinks.length; i++) {
-  categoryLinks[i].addEventListener('click', function(e) {
+function selectCategory(e) {
     let constMenuHeader = document.querySelector('#notes-menu-header');
     e.preventDefault();
-    category = this.getAttribute('data-category');
+    const category = this.getAttribute('data-category');
+
     this.classList.add('selected');
-    constMenuHeader.innerHTML = 'My Notes - ' + category;
-    for (var i = 0; i < categoryLinks.length; i++) {
-        if (this != categoryLinks[i]){
-            categoryLinks[i].classList.remove('selected');
+    constMenuHeader.textContent = `My Notes - ${category}`;
+
+    categoryLinks.forEach(link => {
+        if (this !== link){
+            link.classList.remove('selected');
         }
-    }
+    });
+
     var notes = document.querySelectorAll('div[data-category-notes]');
-    for (var j = 0; j < notes.length; j++) {
-      notes[j].style.display = 'none';
-    }
-    var notesToShow = document.querySelector(`div[data-category-notes="${category}"]`);
+
+    notes.forEach(note => note.style.display = 'none');
+
+    const notesToShow = document.querySelector(`div[data-category-notes="${category}"]`);
+
     if (notesToShow) {
-      notesToShow.style.display = 'block';
+        notesToShow.style.display = 'block';
     }
-  });
 }
 
-addAccordionButton.addEventListener("click",function(){
-    var category = document.querySelector('.selected').getAttribute('data-category');
-    console.log(category);
-    const accordionContainer = document.createElement('div');
-    const accordionButton = document.createElement('button');
-    const accordionTitle = document.createElement('input');
-    const deleteAccordionIcon = document.createElement('i');
-    const accordionPanel = document.createElement('div');
-    const accordionTextArea = document.createElement('textarea');
+accordionButtons.forEach(button => button.addEventListener("click", showPanel));
+deleteAccordionIcons.forEach(icon => icon.addEventListener('click', deleteAccordion));
+categoryLinks.forEach(link => link.addEventListener('click', selectCategory));
+
+addAccordionButton.addEventListener("click", addNewAccordion);
+
+function addNewAccordion() {
+    const category = document.querySelector('.selected').getAttribute('data-category');
+
+    const accordionContainer = document.createElement('div'),
+          accordionButton = document.createElement('button'),
+          accordionTitle = document.createElement('input'),
+          deleteAccordionIcon = document.createElement('i'),
+          accordionPanel = document.createElement('div'),
+          accordionTextArea = document.createElement('textarea');
 
     deleteAccordionIcon.classList.add('delete-accordion', 'fas', 'fa-trash', 'fa-bounce');
-    deleteAccordionIcon.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const container = e.target.parentNode.parentNode;
-        container.parentNode.removeChild(container);
-    });
+    deleteAccordionIcon.addEventListener('click', deleteAccordion);
 
     accordionTitle.placeholder = 'Title...';
     accordionTextArea.placeholder = 'Content...';
@@ -150,28 +138,27 @@ addAccordionButton.addEventListener("click",function(){
     accordionPanel.classList.add('panel');
     accordionTextArea.classList.add('panel-content');
 
-    
-    accordionContainer.appendChild(accordionButton);
     accordionButton.appendChild(accordionTitle);
     accordionButton.appendChild(deleteAccordionIcon);
-    accordionContainer.appendChild(accordionPanel);
     accordionPanel.appendChild(accordionTextArea);
 
-    var newAccordions = document.getElementsByClassName("accordion");
-    for (var i = 0; i < newAccordions.length; i++) {
-        newAccordions[i].addEventListener("click", showPanel);
-    }
+    accordionContainer.appendChild(accordionButton);
+    accordionContainer.appendChild(accordionPanel);
+
+    const newAccordions = document.querySelectorAll(".accordion");
+
+    newAccordions.forEach(button => button.addEventListener("click", showPanel));
 
     let categoryNote = document.querySelector(`div[data-category-notes="${category}"]`);
+
     if (categoryNote) {
-      categoryNote.appendChild(accordionContainer);
-      mainContent.appendChild(categoryNote);
+        categoryNote.appendChild(accordionContainer);
+        mainContent.appendChild(categoryNote);
     }
     else {
         categoryNote = document.createElement('div');
         categoryNote.setAttribute('data-category-notes',category);
         categoryNote.appendChild(accordionContainer);
         mainContent.appendChild(categoryNote);
-        console.log(categoryNote);
     }
-});
+}
