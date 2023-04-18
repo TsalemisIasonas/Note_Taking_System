@@ -55,11 +55,11 @@
         <div class="options-container">
             <h2>Dashboard</h2>
             <ul class="options-list">
-                <li><a href="#">Differential Equations</a></li>
-                <li><a href="#">Matterial Properties</a></li>
-                <li><a href="#">ProgTech</a></li>
-                <li><a href="#">Electromagnetic Fields</a></li>
-            </ul>
+                <li><a href="#" data-category="Differential Equations">Differential Equations</a></li>
+                <li><a href="#" data-category="Material Properties">Material Properties</a></li>
+                <li><a href="#" data-category="ProgTech">ProgTech</a></li>
+                <li><a href="#" data-category="Electromagnetic Fields">Electromagnetic Fields</a></li>
+              </ul>
         </div>
         <button id="add_option_button">+</button>
     </div>
@@ -67,15 +67,30 @@
     <div class="main-content-container">
         <main class="main-content">
 
-            <div class="accordion-container">
-                <button class="accordion">
+            <div data-category-notes="Differential Equations" style="display: none;"">
+                <div class="accordion-container">
+                  <button class="accordion">
                     <input class="accordion-input" type="text" placeholder="Title...">
                     <i class="delete-accordion fas fa-trash fa-bounce"></i>
-                </button>
-                <div class="panel">
+                  </button>
+                  <div class="panel">
                     <textarea class="panel-content" placeholder="Content..."></textarea>
+                  </div>
                 </div>
             </div>
+
+            <div data-category-notes="ProgTech" style="display: none;"">
+                <div class="accordion-container">
+                  <button class="accordion">
+                    <input class="accordion-input" type="text" placeholder="Title...">
+                    <i class="delete-accordion fas fa-trash fa-bounce"></i>
+                  </button>
+                  <div class="panel">
+                    <textarea class="panel-content" placeholder="Content..."></textarea>
+                  </div>
+                </div>
+            </div>
+
         </main>
     </div>
 

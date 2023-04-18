@@ -1,10 +1,12 @@
 const showMenuButton = document.getElementById('show-menu');
 const hideMenuButton = document.getElementById('hide-menu');
 const sideMenu = document.getElementById('side-menu');
+const sideMenuList = sideMenu.getElementsByClassName('options-list');
 const mainContent = document.getElementsByClassName('main-content')[0];
 const mainMenu = document.getElementsByClassName('notes-menu')[0];
 const mainMenuElements = mainMenu.getElementsByClassName('notes-menu-elements')[0];
 const footer = document.getElementById("my-footer");
+const addOptionButton = document.getElementById('add_option_button');
 const addAccordionButton = document.getElementById("add-accordion-button");
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -53,6 +55,8 @@ hideMenuButton.addEventListener('click', () => {
     mainMenuElements.classList.add('fullscreen-width');
 });
 
+
+
 function showPanel() {
     /* Toggle between adding and removing the "active" class,
     to highlight the button that controls the panel */
@@ -81,7 +85,35 @@ for (var i = 0; i< deleteAccordionIcons.length; i++) {
     })
 }
 
+// categories
+var categoryLinks = document.querySelectorAll('a[data-category]');
+
+for (var i = 0; i < categoryLinks.length; i++) {
+  categoryLinks[i].addEventListener('click', function(e) {
+    let constMenuHeader = document.querySelector('#notes-menu-header');
+    e.preventDefault();
+    category = this.getAttribute('data-category');
+    this.classList.add('selected');
+    constMenuHeader.innerHTML = 'My Notes - ' + category;
+    for (var i = 0; i < categoryLinks.length; i++) {
+        if (this != categoryLinks[i]){
+            categoryLinks[i].classList.remove('selected');
+        }
+    }
+    var notes = document.querySelectorAll('div[data-category-notes]');
+    for (var j = 0; j < notes.length; j++) {
+      notes[j].style.display = 'none';
+    }
+    var notesToShow = document.querySelector(`div[data-category-notes="${category}"]`);
+    if (notesToShow) {
+      notesToShow.style.display = 'block';
+    }
+  });
+}
+
 addAccordionButton.addEventListener("click",function(){
+    var category = document.querySelector('.selected').getAttribute('data-category');
+    console.log(category);
     const accordionContainer = document.createElement('div');
     const accordionButton = document.createElement('button');
     const accordionTitle = document.createElement('input');
@@ -105,7 +137,7 @@ addAccordionButton.addEventListener("click",function(){
     accordionPanel.classList.add('panel');
     accordionTextArea.classList.add('panel-content');
 
-    mainContent.appendChild(accordionContainer);
+    
     accordionContainer.appendChild(accordionButton);
     accordionButton.appendChild(accordionTitle);
     accordionButton.appendChild(deleteAccordionIcon);
@@ -115,5 +147,19 @@ addAccordionButton.addEventListener("click",function(){
     var newAccordions = document.getElementsByClassName("accordion");
     for (var i = 0; i < newAccordions.length; i++) {
         newAccordions[i].addEventListener("click", showPanel);
+    }
+
+    let categoryNotes = document.querySelector(`div[data-category-notes="${category}"]`);
+    console.log(categoryNotes);
+    if (categoryNotes) {
+      categoryNotes.appendChild(accordionContainer);
+      mainContent.appendChild(categoryNotes);
+    }
+    else {
+        categoryNotes = document.createElement('div');
+        categoryNotes.setAttribute('data-category-notes',category);
+        categoryNotes.appendChild(accordionContainer);
+        mainContent.appendChild(categoryNotes);
+        console.log(categoryNotes);
     }
 });

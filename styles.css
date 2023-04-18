@@ -134,12 +134,18 @@ header {
   color: white;
 }
 
-#side-menu a:hover {
+#side-menu a:hover,
+#side-menu a:active{
   font-weight: bold;
   background: linear-gradient(to right, #f00, rgb(156, 10, 169));
   -webkit-background-clip: text;
   background-clip: none;
   -webkit-text-fill-color: transparent;
+}
+
+#side-menu a:active {
+  background-color: rgb(156, 10, 169); /* fallback color */
+  background-image: none; /* disable the gradient */
 }
 
 #add_option_button {
@@ -302,7 +308,7 @@ header {
   margin: 20px;
   margin-right: 0;
   position: fixed;
-  top: 205px;
+  top: 210px;
   right: 30px;
   z-index: 1; 
 }
