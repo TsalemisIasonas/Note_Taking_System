@@ -55,6 +55,19 @@ hideMenuButton.addEventListener('click', () => {
     mainMenuElements.classList.add('fullscreen-width');
 });
 
+addOptionButton.addEventListener('click',function(){
+    let optionsContainer = document.querySelector('.options-container');
+    let optionsList = document.querySelector('.options-list');
+    let newListItem = document.createElement('li');
+    let newCategory = document.createElement('a');
+    newCategory.setAttribute('href','#');
+    newCategory.setAttribute('data-category','New Option');
+    newCategory.innerHTML = 'New Option'
+    newListItem.appendChild(newCategory);
+    optionsList.appendChild(newListItem);
+    optionsContainer.appendChild(optionsList);
+})
+
 
 
 function showPanel() {
@@ -149,17 +162,16 @@ addAccordionButton.addEventListener("click",function(){
         newAccordions[i].addEventListener("click", showPanel);
     }
 
-    let categoryNotes = document.querySelector(`div[data-category-notes="${category}"]`);
-    console.log(categoryNotes);
-    if (categoryNotes) {
-      categoryNotes.appendChild(accordionContainer);
-      mainContent.appendChild(categoryNotes);
+    let categoryNote = document.querySelector(`div[data-category-notes="${category}"]`);
+    if (categoryNote) {
+      categoryNote.appendChild(accordionContainer);
+      mainContent.appendChild(categoryNote);
     }
     else {
-        categoryNotes = document.createElement('div');
-        categoryNotes.setAttribute('data-category-notes',category);
-        categoryNotes.appendChild(accordionContainer);
-        mainContent.appendChild(categoryNotes);
-        console.log(categoryNotes);
+        categoryNote = document.createElement('div');
+        categoryNote.setAttribute('data-category-notes',category);
+        categoryNote.appendChild(accordionContainer);
+        mainContent.appendChild(categoryNote);
+        console.log(categoryNote);
     }
 });
