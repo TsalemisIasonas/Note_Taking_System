@@ -158,6 +158,17 @@ header {
   color: white;
 }
 
+.new-category-input {
+  padding: 10px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.758);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Exo 2';
+  font-size: 16px;
+}
+
 
 #side-menu a:hover,
 #side-menu a:active,
@@ -363,6 +374,18 @@ header {
   transition: margin-left 0.1s;
 }
 
+#home-screen-container {
+  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+#home-screen-container h1 {
+  background-color: transparent;
+}
+
 .accordion-container {
   border: 2px solid white;
   border-radius: 5px;
@@ -417,6 +440,11 @@ header {
   color: #e00;
 }
 
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
 
 .panel {
   padding: 0 18px;
@@ -425,7 +453,6 @@ header {
   display: none;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-
 }
 
 .panel-content {

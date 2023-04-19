@@ -9,7 +9,7 @@ const showMenuButton = document.getElementById('show-menu'),
     addOptionButton = document.getElementById('add_option_button'),
     addAccordionButton = document.getElementById("add-accordion-button"),
     accordionButtons = document.querySelectorAll(".accordion"),
-    deleteAccordionIcons = document.querySelectorAll('.delete-accordion, .fas, .fa-trash, .fa-bounce'),
+    deleteAccordionIcons = document.querySelectorAll('.delete-accordion, .fas, .fa-trash'),
     categoryLinks = document.querySelectorAll('a[data-category]');
 
 let optionsContainer = document.querySelector('.options-container'),
@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     mainContent.classList.add('shifted-right');
     mainMenu.classList.add('shifted-right');
     footer.style.display = 'none';
+    mainContent.style.display = 'none';
+    mainMenu.style.display = 'none';
+    addAccordionButton.style.display = 'none';
 });
 
 // show footer if user scrolls under all elements
@@ -87,14 +90,49 @@ addOptionButton.addEventListener('click', addNewOption);
 function addNewOption() {
     let newListItem = document.createElement('li'),
         newCategory = document.createElement('a');
-
     newCategory.setAttribute('href', '#');
-    newCategory.setAttribute('data-category', 'New Option');
-    newCategory.textContent = 'New Option';
+    // newCategory.setAttribute('data-category', '');
+    // newCategory.textContent = 'New Option';
 
+    // Create a hidden input element for editing
+    const input = document.createElement('input');
+    input.classList.add('new-category-input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('placeholder', 'New Option');
+    input.style.display = 'none';
+
+    // Attach event listeners to the new elements
+    newCategory.addEventListener('click', showInput);
+    input.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+            create();
+        }
+    });
+    input.addEventListener('blur', () => {
+        create();
+    });
+
+    function showInput() {
+        newCategory.style.display = 'none';
+        input.style.display = 'inline-block';
+        input.focus();
+    }
+
+    function create() {
+        newCategory.style.display = 'inline-block';
+        newCategory.textContent = input.value;
+        newCategory.setAttribute('data-category', input.value);
+        input.remove();
+    }
+
+    // Add the new elements to the DOM
     newListItem.appendChild(newCategory);
+    newListItem.appendChild(input);
     optionsList.insertBefore(newListItem, optionsList.firstChild);
     optionsContainer.appendChild(optionsList);
+
+    // Trigger click event on new anchor element to put it into edit mode
+    newCategory.click();
 
     newCategory.addEventListener('click', () => {
         highlight(newCategory);
@@ -105,19 +143,27 @@ function addNewOption() {
 
 }
 
+// TODO  hide and show panel is problematic
 
 // show only active category, operate on the accordions
 document.addEventListener("click", function (event) {
     if (event.target.classList.contains("accordion")) { // Check if the clicked element is an accordion
         showPanel(event.target);
     }
+    else if (!event.target.classList.contains('accordion')) {
+        hidePanel();
+    }
 });
 deleteAccordionIcons.forEach(icon => icon.addEventListener('click', deleteAccordion));
+
 document.querySelectorAll('a[data-category]').forEach(a => a.addEventListener('click', function () {
     selectCategory(this.dataset.category);
 }));
 
+
+
 function showPanel(element) {
+    hidePanel();
     element.classList.toggle('active');
     let panel = element.nextElementSibling;
     if (panel.style.display === "block") {
@@ -127,13 +173,29 @@ function showPanel(element) {
     }
 }
 
+function hidePanel() {
+    let active = document.querySelector('.accordion.active');
+    if (active) {
+        active.classList.remove('active');
+        active.nextElementSibling.style.display = "none";
+    }
+}
+
 function deleteAccordion(e) {
     e.stopPropagation();
     const container = e.target.closest('.accordion-container');
-    container.parentNode.removeChild(container);
+    container.classList.add('fade-out');
+    setTimeout(() => {
+        container.parentNode.removeChild(container);
+    }, 200);
 }
 
 function selectCategory(category) {
+    mainContent.style.display = 'block';
+    mainMenu.style.display = 'block';
+    addAccordionButton.style.display = 'block';
+    document.querySelector('#home-screen-container').style.display = 'none';
+    
     let notes = document.querySelectorAll('div[data-category-notes]');
     notes.forEach(note => note.style.display = 'none');
 
@@ -156,7 +218,7 @@ function addNewAccordion() {
         accordionPanel = document.createElement('div'),
         accordionTextArea = document.createElement('textarea');
 
-    deleteAccordionIcon.classList.add('delete-accordion', 'fas', 'fa-trash', 'fa-bounce');
+    deleteAccordionIcon.classList.add('delete-accordion', 'fas', 'fa-trash');
     deleteAccordionIcon.addEventListener('click', deleteAccordion);
 
     accordionTitle.placeholder = 'Title...';
