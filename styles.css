@@ -377,12 +377,22 @@ header {
 #home-screen-container {
   margin-top: 200px;
   display: flex;
+  flex-direction: column;
+  padding: 20px;
   justify-content: center;
   align-items: center;
   background-color: transparent;
+  margin-bottom: 1500px;
 }
 
 #home-screen-container h1 {
+  background-color: transparent;
+}
+
+.object3d-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
 }
 

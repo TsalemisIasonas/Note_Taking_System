@@ -16,6 +16,10 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" rel="stylesheet"> -->
 
     <link rel="stylesheet" type="text/css" href='styles.css'>
+
+    <!-- 3dmodel -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+
 </head>
 
 <body>
@@ -32,6 +36,9 @@
 
     <div id="home-screen-container">
         <h1>WELCOME BACK</h1>
+        <div class="object3d-container">
+            <model-viewer src = './images/owl_logo.glb'shadow-intensity="1" camera-controls touch-action="pan-x"></model-viewer>
+        </div>
     </div>
 
     <div class="notes-menu">

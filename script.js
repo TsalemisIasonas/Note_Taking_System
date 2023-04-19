@@ -194,8 +194,8 @@ function selectCategory(category) {
     mainContent.style.display = 'block';
     mainMenu.style.display = 'block';
     addAccordionButton.style.display = 'block';
-    document.querySelector('#home-screen-container').style.display = 'none';
-    
+    document.querySelector('#home-screen-container').remove();
+
     let notes = document.querySelectorAll('div[data-category-notes]');
     notes.forEach(note => note.style.display = 'none');
 
