@@ -11,6 +11,7 @@ const showMenuButton = document.getElementById('show-menu'),
     accordionButtons = document.querySelectorAll(".accordion"),
     deleteAccordionIcons = document.querySelectorAll('.delete-accordion, .fas, .fa-trash'),
     categoryLinks = document.querySelectorAll('a[data-category]');
+    homeScreen = document.querySelector('#home-screen-container');
 
 let optionsContainer = document.querySelector('.options-container'),
     optionsList = document.querySelector('.options-list');
@@ -20,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sideMenu.style.left = '0';
     mainContent.classList.add('shifted-right');
     mainMenu.classList.add('shifted-right');
+    homeScreen.classList.add('shifted-right');
     footer.style.display = 'none';
     mainContent.style.display = 'none';
     mainMenu.style.display = 'none';
@@ -65,6 +67,7 @@ function showSideMenu(show) {
     hideMenuButton.classList.toggle('flip-button', show);
     mainContent.classList.toggle('shifted-right', show);
     mainMenu.classList.toggle('shifted-right', show);
+    homeScreen.classList.toggle('shifted-right',show);
     mainMenuElements.classList.toggle('fullscreen-width', !show);
 }
 
@@ -116,13 +119,14 @@ function addNewOption() {
         newCategory.style.display = 'none';
         input.style.display = 'inline-block';
         input.focus();
+        newCategory.removeEventListener('click', showInput);
     }
 
     function create() {
         newCategory.style.display = 'inline-block';
         newCategory.textContent = input.value;
         newCategory.setAttribute('data-category', input.value);
-        input.remove();
+        input.style.display = 'none';
     }
 
     // Add the new elements to the DOM
@@ -150,9 +154,9 @@ document.addEventListener("click", function (event) {
     if (event.target.classList.contains("accordion")) { // Check if the clicked element is an accordion
         showPanel(event.target);
     }
-    else if (!event.target.classList.contains('accordion')) {
-        hidePanel();
-    }
+    // else if (!event.target.classList.contains('accordion')) {
+    //     hidePanel();
+    // }
 });
 deleteAccordionIcons.forEach(icon => icon.addEventListener('click', deleteAccordion));
 
@@ -194,8 +198,8 @@ function selectCategory(category) {
     mainContent.style.display = 'block';
     mainMenu.style.display = 'block';
     addAccordionButton.style.display = 'block';
-    document.querySelector('#home-screen-container').remove();
-
+    homeScreen.style.display = 'none';
+    
     let notes = document.querySelectorAll('div[data-category-notes]');
     notes.forEach(note => note.style.display = 'none');
 

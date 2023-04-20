@@ -115,10 +115,12 @@ header {
   max-height: 70%;
   overflow-y: auto;
   border: none;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .options-list::-webkit-scrollbar {
-  background-color: transparent;
+  display: none;
 }
 .options-seperator{
   width: 90%;
@@ -375,24 +377,19 @@ header {
 }
 
 #home-screen-container {
-  margin-top: 200px;
+  border: none;
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding-left: 20px;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   background-color: transparent;
   margin-bottom: 1500px;
+  font-size: 25px;
 }
 
 #home-screen-container h1 {
-  background-color: transparent;
-}
-
-.object3d-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: transparent;
 }
 
