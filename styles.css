@@ -110,9 +110,12 @@ header {
 }
 
 .options-list {
+  padding-top: 20px;
   position: relative;
+  top: 25px;
   right: 0;
-  max-height: 70%;
+  height: 65%;
+  max-height: 65%;
   overflow-y: auto;
   border: none;
   -ms-overflow-style: none; /* IE and Edge */
@@ -158,6 +161,7 @@ header {
   padding: 10px;
   text-decoration: none;
   color: white;
+  width: 100%;
 }
 
 .new-category-input {
@@ -408,7 +412,7 @@ header {
   font-family: 'Exo 2';
   font-weight: bold;
   cursor: pointer;
-  padding: 18px;
+  height: 50px;
   width: 100%;
   text-align: left;
   border: none;
@@ -417,6 +421,10 @@ header {
   border-bottom: 2px solid white;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
 }
 
 .active,
@@ -425,6 +433,8 @@ header {
 }
 
 .accordion-input {
+  padding: 15px;
+  height: 100%;
   background-color: transparent;
   color: white;
   font-size: 20px;
@@ -435,8 +445,8 @@ header {
 }
 
 .delete-accordion {
-  float: right;
-  margin-left: 5px;
+  position: absolute;
+  right: 15px;
   font-size: 20px;
   cursor: pointer;
   color: white;
@@ -454,7 +464,7 @@ header {
 
 
 .panel {
-  padding: 0 18px;
+  padding: 0 15px;
   background-color: #252525;
   color: white;
   display: none;
@@ -483,7 +493,7 @@ header {
   font-size: 13px;
   color: white;
   float: right;
-  margin-left: 5px;
+  margin-right: 35px;
 }
 
 .active:after {
