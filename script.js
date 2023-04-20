@@ -36,8 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Error fetching data:', error);
         });
 });
+
 function initialUpdateDOM(data) {
-    for (var category in data) {
+    for (const category in data) {
         let newListItem = document.createElement('li'),
             newCategory = document.createElement('a');
         newCategory.setAttribute('href', '#');
@@ -47,17 +48,57 @@ function initialUpdateDOM(data) {
         newListItem.appendChild(newCategory);
         optionsList.appendChild(newListItem);
         optionsList.insertBefore(newListItem, optionsList.firstChild);
-        newCategory.addEventListener('click',()=>{highlight(newCategory)});
-        newCategory.addEventListener('click',()=>{
+        newCategory.addEventListener('click', () => { highlight(newCategory) });
+        newCategory.addEventListener('click', () => {
             selectCategory(newCategory.getAttribute('data-category'));
         })
-        var notes = data[category];       // array
-        console.log(notes);
+        var notes = data[category];
         for (var i = 0; i < notes.length; i++) {
-            console.log(category, Object.keys(notes[i])[0], Object.values(notes[i])[0]);
+            var note = notes[i];
+            var noteTitle = Object.keys(note)[0]
+            var noteContent = Object.values(note)[0];
+            console.log(category, noteTitle, noteContent);
+            createInitialAccordions(category,noteTitle,noteContent);
         }
+
     }
     optionsContainer.appendChild(optionsList);
+}
+
+// TODO does not find all notes, only the 1st one, check
+function createInitialAccordions(category, title, content) {
+    const categoryNote = document.createElement('div'),
+        accordionContainer = document.createElement('div'),
+        accordionButton = document.createElement('button'),
+        accordionTitle = document.createElement('span'),
+        deleteAccordionIcon = document.createElement('i'),
+        accordionPanel = document.createElement('div'),
+        accordionTextArea = document.createElement('p');
+
+    deleteAccordionIcon.classList.add('delete-accordion', 'fas', 'fa-trash');
+    deleteAccordionIcon.addEventListener('click', deleteAccordion);
+
+    accordionTitle.innerHTML = title;
+    accordionTextArea.innerHTML = content;
+
+    categoryNote.setAttribute('data-category-notes',category);
+
+    accordionContainer.classList.add('accordion-container');
+    accordionButton.classList.add('accordion');
+    accordionTitle.classList.add('accordion-input');
+    accordionPanel.classList.add('panel');
+    accordionTextArea.classList.add('panel-content');
+
+    accordionButton.appendChild(accordionTitle);
+    accordionButton.appendChild(deleteAccordionIcon);
+    accordionPanel.appendChild(accordionTextArea);
+
+    accordionContainer.appendChild(accordionButton);
+    accordionContainer.appendChild(accordionPanel);
+
+    categoryNote.appendChild(accordionContainer);
+    mainContent.appendChild(categoryNote);
+
 }
 
 
