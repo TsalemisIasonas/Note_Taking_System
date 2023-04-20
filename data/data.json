@@ -1,0 +1,9 @@
+{
+  "differential equations": [
+    {"ODE": "ODE stands for ordinary differential equations"},
+    {"PDE": "PDE stands for partial differential equations"}
+  ],
+  "progTech":[
+    {"deconstructors":"we dont need to always specify them"}
+  ]
+}

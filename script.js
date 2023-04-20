@@ -11,7 +11,7 @@ const showMenuButton = document.getElementById('show-menu'),
     accordionButtons = document.querySelectorAll(".accordion"),
     deleteAccordionIcons = document.querySelectorAll('.delete-accordion, .fas, .fa-trash'),
     categoryLinks = document.querySelectorAll('a[data-category]');
-    homeScreen = document.querySelector('#home-screen-container');
+homeScreen = document.querySelector('#home-screen-container');
 
 let optionsContainer = document.querySelector('.options-container'),
     optionsList = document.querySelector('.options-list');
@@ -26,7 +26,40 @@ document.addEventListener('DOMContentLoaded', () => {
     mainContent.style.display = 'none';
     mainMenu.style.display = 'none';
     addAccordionButton.style.display = 'none';
+    // get data
+    fetch('./data/data.json')
+        .then(response => response.json())
+        .then(data => {
+            initialUpdateDOM(data);
+        })
+        .catch(error => {
+            alert('Error fetching data:', error);
+        });
 });
+function initialUpdateDOM(data) {
+    for (var category in data) {
+        let newListItem = document.createElement('li'),
+            newCategory = document.createElement('a');
+        newCategory.setAttribute('href', '#');
+        newCategory.style.display = 'inline-block';
+        newCategory.textContent = category;
+        newCategory.setAttribute('data-category', category);
+        newListItem.appendChild(newCategory);
+        optionsList.appendChild(newListItem);
+        optionsList.insertBefore(newListItem, optionsList.firstChild);
+        newCategory.addEventListener('click',()=>{highlight(newCategory)});
+        newCategory.addEventListener('click',()=>{
+            selectCategory(newCategory.getAttribute('data-category'));
+        })
+        var notes = data[category];       // array
+        console.log(notes);
+        for (var i = 0; i < notes.length; i++) {
+            console.log(category, Object.keys(notes[i])[0], Object.values(notes[i])[0]);
+        }
+    }
+    optionsContainer.appendChild(optionsList);
+}
+
 
 // show footer if user scrolls under all elements
 window.addEventListener("scroll", function () {
@@ -67,7 +100,7 @@ function showSideMenu(show) {
     hideMenuButton.classList.toggle('flip-button', show);
     mainContent.classList.toggle('shifted-right', show);
     mainMenu.classList.toggle('shifted-right', show);
-    homeScreen.classList.toggle('shifted-right',show);
+    homeScreen.classList.toggle('shifted-right', show);
     mainMenuElements.classList.toggle('fullscreen-width', !show);
 }
 
@@ -77,6 +110,7 @@ categoryLinks.forEach(category => category.addEventListener('click', () => {
 }));
 
 function highlight(element) {
+    console.log(element);
     elementCategory = element.getAttribute('data-category');
     element.classList.add('selected');
     document.getElementById('notes-menu-header').innerHTML = 'My Notes - ' + elementCategory;
@@ -150,7 +184,7 @@ function addNewOption() {
 // TODO  hide and show panel is problematic
 
 // show only active category, operate on the accordions
-document.addEventListener("click", (event)=> {
+document.addEventListener("click", (event) => {
     checkPanelClick(event);
 });
 deleteAccordionIcons.forEach(icon => icon.addEventListener('click', deleteAccordion));
@@ -163,11 +197,11 @@ document.querySelectorAll('a[data-category]').forEach(a => a.addEventListener('c
 
 function checkPanelClick(event) {
     if (event.target.classList.contains("accordion")) { // Check if the clicked element is an accordion
-        document.querySelectorAll('.panel').forEach(panel=> panel.style.display='none');
+        document.querySelectorAll('.panel').forEach(panel => panel.style.display = 'none');
         showPanel(event.target);
     }
     if ((!event.target.classList.contains('accordion'))) {
-        document.querySelectorAll('.panel').forEach(panel=> panel.style.display='none');
+        document.querySelectorAll('.panel').forEach(panel => panel.style.display = 'none');
         hidePanel(event.target);
     }
     if (event.target.classList.contains('panel-content')) {
@@ -194,7 +228,7 @@ function showPanel(element) {
 
 function hidePanel(element) {
     let active = document.querySelector('.accordion.active');
-    if (active && active!=element) {
+    if (active && active != element) {
         active.classList.remove('active');
         active.nextElementSibling.style.display = "none";
     }
@@ -214,7 +248,7 @@ function selectCategory(category) {
     mainMenu.style.display = 'block';
     addAccordionButton.style.display = 'block';
     homeScreen.style.display = 'none';
-    
+
     let notes = document.querySelectorAll('div[data-category-notes]');
     notes.forEach(note => note.style.display = 'none');
 
