@@ -150,13 +150,8 @@ function addNewOption() {
 // TODO  hide and show panel is problematic
 
 // show only active category, operate on the accordions
-document.addEventListener("click", function (event) {
-    if (event.target.classList.contains("accordion")) { // Check if the clicked element is an accordion
-        showPanel(event.target);
-    }
-    // else if (!event.target.classList.contains('accordion')) {
-    //     hidePanel();
-    // }
+document.addEventListener("click", (event)=> {
+    checkPanelClick(event);
 });
 deleteAccordionIcons.forEach(icon => icon.addEventListener('click', deleteAccordion));
 
@@ -166,20 +161,40 @@ document.querySelectorAll('a[data-category]').forEach(a => a.addEventListener('c
 
 
 
-function showPanel(element) {
-    hidePanel();
-    element.classList.toggle('active');
-    let panel = element.nextElementSibling;
-    if (panel.style.display === "block") {
-        panel.style.display = "none";
-    } else {
-        panel.style.display = "block";
+function checkPanelClick(event) {
+    if (event.target.classList.contains("accordion")) { // Check if the clicked element is an accordion
+        document.querySelectorAll('.panel').forEach(panel=> panel.style.display='none');
+        showPanel(event.target);
+    }
+    if ((!event.target.classList.contains('accordion'))) {
+        document.querySelectorAll('.panel').forEach(panel=> panel.style.display='none');
+        hidePanel(event.target);
+    }
+    if (event.target.classList.contains('panel-content')) {
+        event.target.parentNode.style.display = 'block';
+    }
+    if (event.target.classList.contains('accordion-input')) {
+        event.target.parentNode.nextElementSibling.style.display = 'block';
     }
 }
 
-function hidePanel() {
+function showPanel(element) {
+    let panel = element.nextElementSibling;
+    hidePanel(element);
+    if (element.classList.contains('active')) {
+        element.classList.remove('active');
+        panel.style.display = "none";
+    }
+    else {
+        element.classList.add('active');
+        panel.style.display = "block";
+    }
+
+}
+
+function hidePanel(element) {
     let active = document.querySelector('.accordion.active');
-    if (active) {
+    if (active && active!=element) {
         active.classList.remove('active');
         active.nextElementSibling.style.display = "none";
     }
@@ -241,12 +256,6 @@ function addNewAccordion() {
     accordionContainer.appendChild(accordionButton);
     accordionContainer.appendChild(accordionPanel);
 
-    const newAccordions = document.querySelectorAll(".accordion");
-
-    newAccordions.forEach(button => button.addEventListener("click", () => {
-        showPanel(button);
-    }));
-
     let categoryNote = document.querySelector(`div[data-category-notes="${category}"]`);
 
     if (categoryNote) {
@@ -259,4 +268,11 @@ function addNewAccordion() {
         categoryNote.appendChild(accordionContainer);
         mainContent.appendChild(categoryNote);
     }
+
+    // setTimeout(() => {
+    //     accordionButton.click();
+    //     accordionButton.classList.add('active');
+    //     accordionTitle.click();
+    // }, 0);
+
 }
