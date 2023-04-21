@@ -80,6 +80,7 @@ function initialUpdateDOM(data) {
     accordionTextArea.innerHTML = content;
   
     categoryNote.setAttribute('id', id);
+    accordionTitle.classList.add('accordion-title');
   
     accordionContainer.classList.add('accordion-container');
     accordionButton.classList.add('accordion');

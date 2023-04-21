@@ -444,6 +444,11 @@ header {
   outline: none;
 }
 
+.accordion-title {
+  display: flex;
+  align-items: center;
+}
+
 .delete-accordion {
   position: absolute;
   right: 15px;
