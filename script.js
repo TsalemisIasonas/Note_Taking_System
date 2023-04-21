@@ -39,68 +39,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initialUpdateDOM(data) {
     for (const category in data) {
-        let newListItem = document.createElement('li'),
-            newCategory = document.createElement('a');
-        newCategory.setAttribute('href', '#');
-        newCategory.style.display = 'inline-block';
-        newCategory.textContent = category;
-        newCategory.setAttribute('data-category', category);
-        newListItem.appendChild(newCategory);
-        optionsList.appendChild(newListItem);
-        optionsList.insertBefore(newListItem, optionsList.firstChild);
-        newCategory.addEventListener('click', () => { highlight(newCategory) });
-        newCategory.addEventListener('click', () => {
-            selectCategory(newCategory.getAttribute('data-category'));
-        })
-        var notes = data[category];
-        for (var i = 0; i < notes.length; i++) {
-            var note = notes[i];
-            var noteTitle = Object.keys(note)[0]
-            var noteContent = Object.values(note)[0];
-            console.log(category, noteTitle, noteContent);
-            createInitialAccordions(category,noteTitle,noteContent);
-        }
-
+      let newListItem = document.createElement('li');
+      let newCategory = document.createElement('a');
+      newCategory.setAttribute('href', '#');
+      newCategory.style.display = 'inline-block';
+      newCategory.textContent = category;
+      newCategory.setAttribute('data-category', category);
+      newListItem.appendChild(newCategory);
+      optionsList.insertBefore(newListItem, optionsList.firstChild);
+      newCategory.addEventListener('click', () => { highlight(newCategory) });
+      newCategory.addEventListener('click', () => {
+        selectCategory(newCategory.getAttribute('data-category'));
+      })
+      const notes = data[category];
+      for (let i = 0; i < notes.length; i++) {
+        const note = notes[i];
+        const noteTitle = Object.keys(note)[0];
+        const noteContent = Object.values(note)[0];
+        const accordionId = `${category}-${i}`;
+        createInitialAccordions(accordionId, noteTitle, noteContent);
+        console.log(`created ${i} accordion`);
+      }
     }
     optionsContainer.appendChild(optionsList);
-}
-
-// TODO does not find all notes, only the 1st one, check
-function createInitialAccordions(category, title, content) {
+  }
+  
+  function createInitialAccordions(id, title, content) {
     const categoryNote = document.createElement('div'),
-        accordionContainer = document.createElement('div'),
-        accordionButton = document.createElement('button'),
-        accordionTitle = document.createElement('span'),
-        deleteAccordionIcon = document.createElement('i'),
-        accordionPanel = document.createElement('div'),
-        accordionTextArea = document.createElement('p');
-
+      accordionContainer = document.createElement('div'),
+      accordionButton = document.createElement('button'),
+      accordionTitle = document.createElement('span'),
+      deleteAccordionIcon = document.createElement('i'),
+      accordionPanel = document.createElement('div'),
+      accordionTextArea = document.createElement('p');
+  
     deleteAccordionIcon.classList.add('delete-accordion', 'fas', 'fa-trash');
     deleteAccordionIcon.addEventListener('click', deleteAccordion);
-
+  
     accordionTitle.innerHTML = title;
     accordionTextArea.innerHTML = content;
-
-    categoryNote.setAttribute('data-category-notes',category);
-
+  
+    categoryNote.setAttribute('id', id);
+  
     accordionContainer.classList.add('accordion-container');
     accordionButton.classList.add('accordion');
     accordionTitle.classList.add('accordion-input');
     accordionPanel.classList.add('panel');
     accordionTextArea.classList.add('panel-content');
-
+  
     accordionButton.appendChild(accordionTitle);
     accordionButton.appendChild(deleteAccordionIcon);
     accordionPanel.appendChild(accordionTextArea);
-
+  
     accordionContainer.appendChild(accordionButton);
     accordionContainer.appendChild(accordionPanel);
-
+  
     categoryNote.appendChild(accordionContainer);
     mainContent.appendChild(categoryNote);
-
-}
-
+    console.log(categoryNote);
+  }
+  
 
 // show footer if user scrolls under all elements
 window.addEventListener("scroll", function () {
