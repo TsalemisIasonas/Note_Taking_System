@@ -150,11 +150,12 @@ header {
   /* border-top: 2px solid red;
   border-top-right-radius: 14px; */
   margin-top: 10px;
+  border-left: 1px solid #e00
 }
 
-#side-menu li:first-child {
+/* #side-menu li:first-child {
   border-bottom: none;
-}
+} */
 
 #side-menu a {
   display: block;

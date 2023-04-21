@@ -57,14 +57,14 @@ function initialUpdateDOM(data) {
         const noteTitle = Object.keys(note)[0];
         const noteContent = Object.values(note)[0];
         const accordionId = `${category}-${i}`;
-        createInitialAccordions(accordionId, noteTitle, noteContent);
-        console.log(`created ${i} accordion`);
+        createInitialAccordions(accordionId, category,noteTitle, noteContent);
+        //console.log(`created ${i} accordion`);
       }
     }
     optionsContainer.appendChild(optionsList);
   }
   
-  function createInitialAccordions(id, title, content) {
+  function createInitialAccordions(id, category, title, content) {
     const categoryNote = document.createElement('div'),
       accordionContainer = document.createElement('div'),
       accordionButton = document.createElement('button'),
@@ -80,6 +80,7 @@ function initialUpdateDOM(data) {
     accordionTextArea.innerHTML = content;
   
     categoryNote.setAttribute('id', id);
+    categoryNote.setAttribute('data-category-notes',category);
     accordionTitle.classList.add('accordion-title');
   
     accordionContainer.classList.add('accordion-container');
@@ -97,7 +98,6 @@ function initialUpdateDOM(data) {
   
     categoryNote.appendChild(accordionContainer);
     mainContent.appendChild(categoryNote);
-    console.log(categoryNote);
   }
   
 
@@ -150,7 +150,6 @@ categoryLinks.forEach(category => category.addEventListener('click', () => {
 }));
 
 function highlight(element) {
-    console.log(element);
     elementCategory = element.getAttribute('data-category');
     element.classList.add('selected');
     document.getElementById('notes-menu-header').innerHTML = 'My Notes - ' + elementCategory;
@@ -292,10 +291,10 @@ function selectCategory(category) {
     let notes = document.querySelectorAll('div[data-category-notes]');
     notes.forEach(note => note.style.display = 'none');
 
-    const notesToShow = document.querySelector(`div[data-category-notes="${category}"]`);
+    const notesToShow = document.querySelectorAll(`div[data-category-notes="${category}"]`);
 
     if (notesToShow) {
-        notesToShow.style.display = 'block';
+        notesToShow.forEach(note => note.style.display = 'block');
     }
 }
 
