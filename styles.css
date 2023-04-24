@@ -376,11 +376,6 @@ header {
   margin-bottom: 1500px;
 }
 
-.initial-accordions-container {
-  background-color: transparent;
-  border: 2px solid black;
-}
-
 .shifted-right {
   margin-left: 200px;
   transition: margin-left 0.1s;

@@ -10,11 +10,8 @@ const showMenuButton = document.getElementById('show-menu'),
     addAccordionButton = document.getElementById("add-accordion-button"),
     accordionButtons = document.querySelectorAll(".accordion"),
     deleteAccordionIcons = document.querySelectorAll('.delete-accordion, .fas, .fa-trash'),
-    categoryLinks = document.querySelectorAll('a[data-category]');
-    homeScreen = document.querySelector('#home-screen-container'),
-
-    initialAccordionsContainer = document.createElement('div'),     // container for any accordions that are appended to DOM from json data
-    initialAccordionsContainer.classList.add('initial-accordions-container');
+    categoryLinks = document.querySelectorAll('a[data-category]'),
+    homeScreen = document.querySelector('#home-screen-container');
 
 let optionsContainer = document.querySelector('.options-container'),
     optionsList = document.querySelector('.options-list');
@@ -67,7 +64,6 @@ function initialUpdateDOM(data) {
         }
     }
     optionsContainer.appendChild(optionsList);
-    mainContent.appendChild(initialAccordionsContainer);
 }
 
 function createInitialAccordions(id, category, title, content) {
@@ -105,8 +101,8 @@ function createInitialAccordions(id, category, title, content) {
     accordionContainer.appendChild(accordionPanel);
 
     categoryNote.appendChild(accordionContainer);
+    mainContent.appendChild(categoryNote);
     //mainContent.insertBefore(categoryNote,mainContent.firstChild);
-    initialAccordionsContainer.appendChild(categoryNote);
 }
 
 
@@ -343,9 +339,12 @@ function addNewAccordion() {
     if (categoryNote) {
         categoryNote.appendChild(accordionContainer);
         mainContent.appendChild(categoryNote);
+        mainContent.insertBefore(categoryNote,mainContent.lastChild);
     }
     else {
         categoryNote = document.createElement('div');
+        categoryNote.setAttribute('data-category-notes', category);
+        categoryNote.id = `category-${category}-${categoryCounter}`;
         categoryNote.setAttribute('data-category-notes', category);
         categoryNote.appendChild(accordionContainer);
         mainContent.appendChild(categoryNote);
