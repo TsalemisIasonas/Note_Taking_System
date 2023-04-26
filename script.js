@@ -59,7 +59,6 @@ function initialUpdateDOM(data) {
 
         const categoryNote = document.createElement('div');
         categoryNote.setAttribute('data-category-notes', category);
-        categoryNote.classList.add('main-content-container');
         mainContent.appendChild(categoryNote); // append container to main content
 
         const notes = data[category];
@@ -92,6 +91,7 @@ function createInitialAccordions(categoryNote, title, content) {
     accordionContainer.classList.add('accordion-container');
     accordionButton.classList.add('accordion');
     accordionTitle.classList.add('accordion-input');
+    accordionTitle.classList.add('accordion-title');
     accordionPanel.classList.add('panel');
     accordionTextArea.classList.add('panel-content');
 
