@@ -463,6 +463,20 @@ header {
   color: #e00;
 }
 
+
+.save-accordion {
+  position: absolute;
+  right: 55px;
+  top: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+}
+
+.save-accordion:hover {
+  color: #0e0;
+}
+
 .fade-out {
   opacity: 0;
   transition: opacity 0.2s ease-in-out;

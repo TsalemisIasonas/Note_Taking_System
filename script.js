@@ -313,11 +313,17 @@ function addNewAccordion() {
         accordionButton = document.createElement('button'),
         accordionTitle = document.createElement('input'),
         deleteAccordionIcon = document.createElement('i'),
+        saveAccordionIcon = document.createElement('i');
         accordionPanel = document.createElement('div'),
         accordionTextArea = document.createElement('textarea');
 
     deleteAccordionIcon.classList.add('delete-accordion', 'fas', 'fa-trash');
     deleteAccordionIcon.addEventListener('click', deleteAccordion);
+
+    saveAccordionIcon.classList.add('save-accordion', 'fas', 'fa-check-to-slot');
+    saveAccordionIcon.addEventListener('click', ()=>{
+        saveAccordion(category,accordionTitle.value, accordionTextArea.value);
+    });
 
     accordionTitle.placeholder = 'Title...';
     accordionTextArea.placeholder = 'Content...';
@@ -330,7 +336,9 @@ function addNewAccordion() {
 
     accordionButton.appendChild(accordionTitle);
     accordionButton.appendChild(deleteAccordionIcon);
+    accordionButton.appendChild(saveAccordionIcon);
     accordionPanel.appendChild(accordionTextArea);
+    
 
     accordionContainer.appendChild(accordionButton);
     accordionContainer.appendChild(accordionPanel);
@@ -348,7 +356,6 @@ function addNewAccordion() {
         categoryNote.appendChild(accordionContainer);
         mainContent.appendChild(categoryNote);
     }
-    console.log(mainContent.firstChild);
 
     // setTimeout(() => {
     //     accordionButton.click();
@@ -357,3 +364,31 @@ function addNewAccordion() {
     // }, 0);
 
 }
+
+function saveAccordion(category, titleValue, contentValue) {
+    if (titleValue !== '' && contentValue !== '') {
+      // Load the existing data from the JSON file using a fetch request
+      fetch('./data/data.json')
+        .then(response => response.json())
+        .then(data => {
+          // Check if the category already exists in the JSON
+          if (data.hasOwnProperty(category)) {
+            // If it does, add the new object to the existing array
+            data[category].push({ [titleValue]: contentValue });
+          } else {
+            // If it doesn't, create a new array with the new object and assign it to the category key
+            data[category] = [{ [titleValue]: contentValue }];
+          }
+  
+          // Convert JSON object back to a string and save to file
+          var jsonString = JSON.stringify(data);
+          // code to write jsonString back to the file
+        })
+        .catch(error => {
+          alert('Error fetching data:', error);
+        });
+    } else {
+      alert("Can't save without content");
+    }
+  }
+  
