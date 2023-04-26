@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initialUpdateDOM(data) {
+    // create options menu
     for (const category in data) {
+        // create list item for category
         let newListItem = document.createElement('li');
         let newCategory = document.createElement('a');
         newCategory.setAttribute('href', '#');
@@ -49,26 +51,32 @@ function initialUpdateDOM(data) {
         newCategory.setAttribute('data-category', category);
         newListItem.appendChild(newCategory);
         optionsList.insertBefore(newListItem, optionsList.firstChild);
+
         newCategory.addEventListener('click', () => { highlight(newCategory) });
         newCategory.addEventListener('click', () => {
             selectCategory(newCategory.getAttribute('data-category'));
         })
+
+        const categoryNote = document.createElement('div');
+        categoryNote.setAttribute('data-category-notes', category);
+        categoryNote.classList.add('main-content-container');
+        mainContent.appendChild(categoryNote); // append container to main content
+
         const notes = data[category];
         for (let i = 0; i < notes.length; i++) {
             const note = notes[i];
             const noteTitle = Object.keys(note)[0];
             const noteContent = Object.values(note)[0];
-            const accordionId = `${category}-${i}`;
-            createInitialAccordions(accordionId, category, noteTitle, noteContent);
-            //console.log(`created ${i} accordion`);
+            createInitialAccordions(categoryNote, noteTitle, noteContent);
         }
     }
+
     optionsContainer.appendChild(optionsList);
 }
 
-function createInitialAccordions(id, category, title, content) {
-    const categoryNote = document.createElement('div'),
-        accordionContainer = document.createElement('div'),
+
+function createInitialAccordions(categoryNote, title, content) {
+    const accordionContainer = document.createElement('div'),
         accordionButton = document.createElement('button'),
         accordionTitle = document.createElement('span'),
         deleteAccordionIcon = document.createElement('i'),
@@ -80,12 +88,6 @@ function createInitialAccordions(id, category, title, content) {
 
     accordionTitle.innerHTML = title;
     accordionTextArea.innerHTML = content;
-
-    categoryNote.setAttribute('id', id);
-    categoryNote.setAttribute('data-category-notes', category);
-    accordionTitle.classList.add('accordion-title');
-
-
 
     accordionContainer.classList.add('accordion-container');
     accordionButton.classList.add('accordion');
@@ -101,8 +103,7 @@ function createInitialAccordions(id, category, title, content) {
     accordionContainer.appendChild(accordionPanel);
 
     categoryNote.appendChild(accordionContainer);
-    mainContent.appendChild(categoryNote);
-    //mainContent.insertBefore(categoryNote,mainContent.firstChild);
+    //mainContent.appendChild(categoryNote);
 }
 
 
@@ -339,7 +340,7 @@ function addNewAccordion() {
     if (categoryNote) {
         categoryNote.appendChild(accordionContainer);
         mainContent.appendChild(categoryNote);
-        mainContent.insertBefore(categoryNote,mainContent.lastChild);
+        mainContent.insertBefore(categoryNote, mainContent.firstChild);
     }
     else {
         categoryNote = document.createElement('div');
@@ -349,6 +350,7 @@ function addNewAccordion() {
         categoryNote.appendChild(accordionContainer);
         mainContent.appendChild(categoryNote);
     }
+    console.log(mainContent.firstChild);
 
     // setTimeout(() => {
     //     accordionButton.click();
