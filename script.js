@@ -308,7 +308,7 @@ addAccordionButton.addEventListener("click", addNewAccordion);
 
 function addNewAccordion() {
     const category = document.querySelector('.selected').getAttribute('data-category');
-
+    console.log(category);
     const accordionContainer = document.createElement('div'),
         accordionButton = document.createElement('button'),
         accordionTitle = document.createElement('input'),
@@ -344,8 +344,6 @@ function addNewAccordion() {
     }
     else {
         categoryNote = document.createElement('div');
-        categoryNote.setAttribute('data-category-notes', category);
-        categoryNote.id = `category-${category}-${categoryCounter}`;
         categoryNote.setAttribute('data-category-notes', category);
         categoryNote.appendChild(accordionContainer);
         mainContent.appendChild(categoryNote);
