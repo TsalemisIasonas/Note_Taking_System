@@ -336,8 +336,8 @@ function addNewAccordion() {
 
     accordionButton.appendChild(accordionTitle);
     accordionButton.appendChild(deleteAccordionIcon);
-    accordionButton.appendChild(saveAccordionIcon);
     accordionPanel.appendChild(accordionTextArea);
+    accordionPanel.appendChild(saveAccordionIcon);  
     
 
     accordionContainer.appendChild(accordionButton);
