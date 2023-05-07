@@ -61,6 +61,7 @@ def delete_accordion():
     titleValue = req_data['titleValue']
     contentValue = req_data['contentValue']
     delete_data(category,titleValue,contentValue) 
+    return 'Data received and processed!'
 
 
 

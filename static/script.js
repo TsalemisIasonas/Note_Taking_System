@@ -29,17 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initialUpdateDOM(jsonData);     // jsonData is defined in the html
 
-
-    // get data
-    // fetch(dataPath)
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data);
-    //         //initialUpdateDOM(data);
-    //     })
-    //     .catch(error => {
-    //         alert('Error fetching data:', error);
-    //     });
 });
 
 function initialUpdateDOM(data) {
@@ -86,7 +75,9 @@ function createInitialAccordions(categoryNote, title, content) {
         accordionTextArea = document.createElement('p');
 
     deleteAccordionIcon.classList.add('delete-accordion', 'fas', 'fa-trash');
-    deleteAccordionIcon.addEventListener('click', deleteAccordion);
+    deleteAccordionIcon.addEventListener('click', ()=>{
+        deleteAccordion(deleteAccordionIcon,title,content);
+    });
 
     accordionTitle.innerHTML = title;
     accordionTextArea.innerHTML = content;
@@ -235,7 +226,7 @@ function addNewOption() {
 document.addEventListener("click", (event) => {
     checkPanelClick(event);
 });
-deleteAccordionIcons.forEach(icon => icon.addEventListener('click', deleteAccordion));
+// deleteAccordionIcons.forEach(icon => icon.addEventListener('click', deleteAccordion));
 
 document.querySelectorAll('a[data-category]').forEach(a => a.addEventListener('click', function () {
     selectCategory(this.dataset.category);
@@ -282,9 +273,11 @@ function hidePanel(element) {
     }
 }
 
-function deleteAccordion(e) {
-    e.stopPropagation();
-    const container = e.target.closest('.accordion-container');
+function deleteAccordion(icon,titleValue,contentValue) {
+    const category = document.querySelector('.selected').getAttribute('data-category');
+    // e.stopPropagation();
+    const container = icon.closest('.accordion-container');
+    console.log(category,titleValue,contentValue);
     fetch('/delete-accordion', {
         method: 'POST',
         headers: {
@@ -323,7 +316,6 @@ addAccordionButton.addEventListener("click", addNewAccordion);
 
 function addNewAccordion() {
     const category = document.querySelector('.selected').getAttribute('data-category');
-    console.log(category);
     const accordionContainer = document.createElement('div'),
         accordionButton = document.createElement('button'),
         accordionTitle = document.createElement('input'),
@@ -333,7 +325,9 @@ function addNewAccordion() {
         accordionTextArea = document.createElement('textarea');
 
     deleteAccordionIcon.classList.add('delete-accordion', 'fas', 'fa-trash');
-    deleteAccordionIcon.addEventListener('click', deleteAccordion);
+    deleteAccordionIcon.addEventListener('click', ()=>{
+        deleteAccordion(deleteAccordionIcon,accordionTitle.value, accordionTextArea.value);
+    });
 
     saveAccordionIcon.classList.add('save-accordion', 'fas', 'fa-check-to-slot');
     saveAccordionIcon.addEventListener('click', ()=>{
