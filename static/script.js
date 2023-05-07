@@ -285,6 +285,18 @@ function hidePanel(element) {
 function deleteAccordion(e) {
     e.stopPropagation();
     const container = e.target.closest('.accordion-container');
+    fetch('/delete-accordion', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            category: category,
+            titleValue: titleValue,
+            contentValue: contentValue
+        })
+    })
+    .then(response => response.text())
     container.classList.add('fade-out');
     setTimeout(() => {
         container.parentNode.removeChild(container);

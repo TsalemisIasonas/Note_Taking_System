@@ -5,6 +5,9 @@
     },
     {
       "PDE": "PDE stands for partial differential equations"
+    },
+    {
+      "Data Link Layer": "Frames"
     }
   ],
   "ProgTech": [
@@ -15,9 +18,14 @@
       "constructors": "called when you create an instance of the class"
     }
   ],
-  "New Options": [
+  "Computer Networks": [
     {
-      "New Option": "adfgadgs"
+      "Data Link Layer": "Frames"
+    }
+  ],
+  "New Option": [
+    {
+      "Hi ": "hello"
     }
   ]
 }
