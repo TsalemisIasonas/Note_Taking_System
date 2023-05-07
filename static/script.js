@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // get data
-    fetch('./data/data.json')
+    fetch('../data/data.json')
         .then(response => response.json())
         .then(data => {
             initialUpdateDOM(data);
@@ -367,24 +367,21 @@ function addNewAccordion() {
 
 function saveAccordion(category, titleValue, contentValue) {
     if (titleValue !== '' && contentValue !== '') {
-      // Load the existing data from the JSON file using a fetch request
-      fetch('/save-accordion', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          category: category,
-          titleValue: titleValue,
-          contentValue: contentValue
+        fetch('/save-accordion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                category: category,
+                titleValue: titleValue,
+                contentValue: contentValue
+            })
         })
-      })
-      .then(response => response.text())
-      .then(data => {
-        console.log(data);
-      })
+        .then(response => response.text())
     } else {
-      alert("Can't save without content");
+        alert("Can't save without content");
     }
-  }
+}
+
   
