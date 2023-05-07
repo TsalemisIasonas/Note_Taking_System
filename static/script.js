@@ -27,17 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
     mainMenu.style.display = 'none';
     addAccordionButton.style.display = 'none';
 
+    initialUpdateDOM(jsonData);     // jsonData is defined in the html
+
 
     // get data
-    fetch('/data')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            //initialUpdateDOM(data);
-        })
-        .catch(error => {
-            alert('Error fetching data:', error);
-        });
+    // fetch(dataPath)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         //initialUpdateDOM(data);
+    //     })
+    //     .catch(error => {
+    //         alert('Error fetching data:', error);
+    //     });
 });
 
 function initialUpdateDOM(data) {

@@ -15,7 +15,9 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     data_path = os.path.join(os.path.dirname(__file__), 'data', 'data.json') 
-    return render_template('app.html',data_path = data_path)
+    with open(data_path,'r') as filename:
+        data = json.load(filename)
+    return render_template('app.html',data = data)
 
 @app.route("/data")
 def get_data():
