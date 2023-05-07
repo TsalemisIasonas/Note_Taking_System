@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // get data
-    fetch('../data/data.json')
+    fetch('/data')
         .then(response => response.json())
         .then(data => {
             console.log(data);

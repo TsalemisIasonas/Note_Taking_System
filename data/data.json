@@ -1,10 +1,23 @@
 {
   "Differential Equations": [
-    {"ODE": "ODE stands for ordinary differential equations"},
-    {"PDE": "PDE stands for partial differential equations"}
+    {
+      "ODE": "ODE stands for ordinary differential equations"
+    },
+    {
+      "PDE": "PDE stands for partial differential equations"
+    }
   ],
-  "ProgTech":[
-    {"deconstructors":"we dont need to always specify them"},
-    {"constructors":"called when you create an instance of the class"}
+  "ProgTech": [
+    {
+      "deconstructors": "we dont need to always specify them"
+    },
+    {
+      "constructors": "called when you create an instance of the class"
+    }
+  ],
+  "New Options": [
+    {
+      "New Option": "adfgadgs"
+    }
   ]
 }
