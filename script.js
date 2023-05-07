@@ -368,25 +368,21 @@ function addNewAccordion() {
 function saveAccordion(category, titleValue, contentValue) {
     if (titleValue !== '' && contentValue !== '') {
       // Load the existing data from the JSON file using a fetch request
-      fetch('./data/data.json')
-        .then(response => response.json())
-        .then(data => {
-          // Check if the category already exists in the JSON
-          if (data.hasOwnProperty(category)) {
-            // If it does, add the new object to the existing array
-            data[category].push({ [titleValue]: contentValue });
-          } else {
-            // If it doesn't, create a new array with the new object and assign it to the category key
-            data[category] = [{ [titleValue]: contentValue }];
-          }
-  
-          // Convert JSON object back to a string and save to file
-          var jsonString = JSON.stringify(data);
-          // code to write jsonString back to the file
+      fetch('/save-accordion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          category: category,
+          titleValue: titleValue,
+          contentValue: contentValue
         })
-        .catch(error => {
-          alert('Error fetching data:', error);
-        });
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+      })
     } else {
       alert("Can't save without content");
     }
