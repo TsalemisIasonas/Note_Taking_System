@@ -164,7 +164,9 @@ function highlight(element,deleteCategoryIcon) {
     deleteIcons.forEach((icon) => {
         icon.style.display = 'none';
     })
-    deleteCategoryIcon.style.display = 'block';
+    if (deleteCategoryIcon){
+        deleteCategoryIcon.style.display = 'block';
+    }
     elementCategory = element.getAttribute('data-category');
     element.classList.add('selected');
     document.getElementById('notes-menu-header').innerHTML = 'My Notes - ' + elementCategory;
@@ -179,6 +181,10 @@ function highlight(element,deleteCategoryIcon) {
 addOptionButton.addEventListener('click', addNewOption);
 
 function addNewOption() {
+    const deleteCategoryIcons = document.querySelectorAll('.delete-category');
+    deleteCategoryIcons.forEach((icon)=>{
+        icon.style.display = 'none';
+    })
     let newListItem = document.createElement('li'),
         newCategory = document.createElement('a');
     let deleteCategoryIcon = document.createElement('i');
@@ -233,7 +239,7 @@ function addNewOption() {
     newCategory.click();
 
     newCategory.addEventListener('click', () => {
-        highlight(newCategory);
+        highlight(newCategory,deleteCategoryIcon);
     });
     newCategory.addEventListener('click', () => {
         selectCategory(newCategory.dataset.category);
