@@ -72,7 +72,7 @@ def delete_accordion():
     delete_data(category,titleValue,contentValue) 
     return 'Data recieved and processed successfully'
 
-@app.route('/detete-category', methods = ['POST'])
+@app.route('/delete-category', methods = ['POST'])
 def delete_category():
     req_data = request.get_json()
     category = req_data['category']

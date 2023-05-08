@@ -305,6 +305,8 @@ function deleteAccordion(icon,titleValue,contentValue) {
 
 function deleteCategory(icon,category) {
     const container = icon.closest('li');
+    let nextCategory = container.closest('ul');
+    console.log(nextCategory);
     let accordions = document.querySelectorAll(`[data-category-notes="${category}"]`);
     fetch('/delete-category', {
         method: 'POST',
@@ -322,8 +324,14 @@ function deleteCategory(icon,category) {
         accordions.forEach((accordion) => {
             accordion.classList.add('fade-out');
         })
-        accordions[0].parentNode.removeChild(accordions);
+        accordions[0].parentNode.removeChild(accordions[0]);
     }, 200);
+    nextCategory = nextCategory.firstChild;
+    nextCategory = nextCategory.firstChild;
+    console.log(nextCategory);
+    setTimeout(()=>{
+        nextCategory.click();
+    },200);
 }
 
 function selectCategory(category) {
