@@ -304,7 +304,6 @@ function deleteAccordion(icon,titleValue,contentValue) {
     const category = document.querySelector('.selected').getAttribute('data-category');
     // e.stopPropagation();
     const container = icon.closest('.accordion-container');
-    console.log(category,titleValue,contentValue);
     fetch('/delete-accordion', {
         method: 'POST',
         headers: {
@@ -352,7 +351,6 @@ function deleteCategory(icon,category) {
             break;
         }
     }
-    console.log(nextCategory);
     setTimeout(()=>{
         nextCategory.click();
     },200);
