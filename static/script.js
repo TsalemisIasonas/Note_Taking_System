@@ -39,6 +39,7 @@ function initialUpdateDOM(data) {
         let newCategory = document.createElement('a');
         let deleteCategoryIcon = document.createElement('i');
         deleteCategoryIcon.classList.add('delete-category','fas', 'fa-trash');
+        deleteCategoryIcon.style.display = 'none';
         newCategory.setAttribute('href', '#');
         newCategory.style.display = 'inline-block';
         newCategory.textContent = category;
@@ -47,7 +48,9 @@ function initialUpdateDOM(data) {
         newListItem.appendChild(deleteCategoryIcon);
         optionsList.insertBefore(newListItem, optionsList.firstChild);
 
-        newCategory.addEventListener('click', () => { highlight(newCategory) });
+        newCategory.addEventListener('click', () => { 
+            highlight(newCategory,deleteCategoryIcon) ;
+        });
         newCategory.addEventListener('click', () => {
             selectCategory(newCategory.getAttribute('data-category'));
         })
@@ -156,7 +159,12 @@ categoryLinks.forEach(category => category.addEventListener('click', () => {
     highlight(category);
 }));
 
-function highlight(element) {
+function highlight(element,deleteCategoryIcon) {
+    deleteIcons = document.querySelectorAll('.delete-category');
+    deleteIcons.forEach((icon) => {
+        icon.style.display = 'none';
+    })
+    deleteCategoryIcon.style.display = 'block';
     elementCategory = element.getAttribute('data-category');
     element.classList.add('selected');
     document.getElementById('notes-menu-header').innerHTML = 'My Notes - ' + elementCategory;
