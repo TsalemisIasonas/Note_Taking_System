@@ -41,6 +41,11 @@ def delete_data(category, title_value, content_value):
     with open(data_file_path, 'w') as f:
         json.dump(existing_data, f, indent=2)
 
+def remove_category():
+    data_file_path = os.path.join(os.path.dirname(__file__), 'data', 'data.json')
+    with open(data_file_path, 'r') as f:
+        existing_data = json.load(f)
+
     
 
 @app.route('/save-accordion', methods=['POST'])
@@ -52,7 +57,7 @@ def save_accordion():
 
     append_data(category,titleValue,contentValue)
 
-    return 'Data received and processed!'
+    return 'Data recieved and processed successfully'
 
 @app.route('/delete-accordion', methods=['POST'])
 def delete_accordion():
@@ -61,7 +66,14 @@ def delete_accordion():
     titleValue = req_data['titleValue']
     contentValue = req_data['contentValue']
     delete_data(category,titleValue,contentValue) 
-    return 'Data received and processed!'
+    return 'Data recieved and processed successfully'
+
+@app.route('/detete-category', methods = ['POST'])
+def delete_category():
+    req_data = request.get_json()
+    category = req_data['category']
+    remove_category(category)
+    return 'Data recieved and processed successfully'
 
 
 

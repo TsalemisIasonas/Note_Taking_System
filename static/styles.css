@@ -58,6 +58,7 @@ header {
 }
 
 .header-content h1 {
+  font-family: 'Exo 2';
   font-size: 3em;
 }
 
@@ -137,6 +138,7 @@ header {
 }
 
 #side-menu h2 {
+  font-family: 'Exo 2';
   text-align: start;
   padding: 10px;
   margin-top: 20px;
@@ -153,7 +155,16 @@ header {
   /* border-top: 2px solid red;
   border-top-right-radius: 14px; */
   margin-top: 10px;
-  border-left: 1px solid #e00
+  border-left: 1px solid #e00;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 12px;
+}
+
+.delete-category:hover{
+  color:#e00;
 }
 
 /* #side-menu li:first-child {
@@ -398,6 +409,7 @@ header {
 }
 
 #home-screen-container h1 {
+  font-family: 'Exo 2';
   background-color: transparent;
 }
 

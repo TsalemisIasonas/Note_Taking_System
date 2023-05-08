@@ -37,16 +37,23 @@ function initialUpdateDOM(data) {
         // create list item for category
         let newListItem = document.createElement('li');
         let newCategory = document.createElement('a');
+        let deleteCategoryIcon = document.createElement('i');
+        deleteCategoryIcon.classList.add('delete-category','fas', 'fa-trash');
         newCategory.setAttribute('href', '#');
         newCategory.style.display = 'inline-block';
         newCategory.textContent = category;
         newCategory.setAttribute('data-category', category);
         newListItem.appendChild(newCategory);
+        newListItem.appendChild(deleteCategoryIcon);
         optionsList.insertBefore(newListItem, optionsList.firstChild);
 
         newCategory.addEventListener('click', () => { highlight(newCategory) });
         newCategory.addEventListener('click', () => {
             selectCategory(newCategory.getAttribute('data-category'));
+        })
+
+        deleteCategoryIcon.addEventListener('click',()=>{       // TODO IMPLEMENT
+            deleteCategory(deleteCategoryIcon,category);
         })
 
         const categoryNote = document.createElement('div');
@@ -287,6 +294,25 @@ function deleteAccordion(icon,titleValue,contentValue) {
             category: category,
             titleValue: titleValue,
             contentValue: contentValue
+        })
+    })
+    .then(response => response.text())
+    container.classList.add('fade-out');
+    setTimeout(() => {
+        container.parentNode.removeChild(container);
+    }, 200);
+}
+
+function deleteCategory(icon,category) {
+    const container = icon.closest('li');
+    console.log(container);
+    fetch('/delete-category', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            category: category
         })
     })
     .then(response => response.text())
