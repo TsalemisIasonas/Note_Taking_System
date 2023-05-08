@@ -52,7 +52,7 @@ function initialUpdateDOM(data) {
             selectCategory(newCategory.getAttribute('data-category'));
         })
 
-        deleteCategoryIcon.addEventListener('click',()=>{       // TODO IMPLEMENT
+        deleteCategoryIcon.addEventListener('click',()=>{       
             deleteCategory(deleteCategoryIcon,category);
         })
 
@@ -173,6 +173,8 @@ addOptionButton.addEventListener('click', addNewOption);
 function addNewOption() {
     let newListItem = document.createElement('li'),
         newCategory = document.createElement('a');
+    let deleteCategoryIcon = document.createElement('i');
+    deleteCategoryIcon.classList.add('delete-category','fas', 'fa-trash');
     newCategory.setAttribute('href', '#');
     // newCategory.setAttribute('data-category', '');
     // newCategory.textContent = 'New Option';
@@ -209,6 +211,10 @@ function addNewOption() {
         input.style.display = 'none';
     }
 
+    deleteCategoryIcon.addEventListener('click',()=>{       
+        deleteCategory(deleteCategoryIcon,input.value);
+    })
+
     // Add the new elements to the DOM
     newListItem.appendChild(newCategory);
     newListItem.appendChild(input);
@@ -223,8 +229,8 @@ function addNewOption() {
     });
     newCategory.addEventListener('click', () => {
         selectCategory(newCategory.dataset.category);
+        newListItem.appendChild(deleteCategoryIcon);
     });
-
 }
 
 // TODO  hide and show panel is problematic
@@ -306,7 +312,6 @@ function deleteAccordion(icon,titleValue,contentValue) {
 function deleteCategory(icon,category) {
     const container = icon.closest('li');
     let nextCategory = container.closest('ul');
-    console.log(nextCategory);
     let accordions = document.querySelectorAll(`[data-category-notes="${category}"]`);
     fetch('/delete-category', {
         method: 'POST',
@@ -320,14 +325,19 @@ function deleteCategory(icon,category) {
     .then(response => response.text())
     container.classList.add('fade-out');
     setTimeout(() => {
-        container.parentNode.removeChild(container);
+        container.remove();
         accordions.forEach((accordion) => {
             accordion.classList.add('fade-out');
+            accordion.remove();
         })
-        accordions[0].parentNode.removeChild(accordions[0]);
     }, 200);
-    nextCategory = nextCategory.firstChild;
-    nextCategory = nextCategory.firstChild;
+    let options = document.querySelectorAll(`[data-category]`);
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].innerHTML !== category) {
+            nextCategory = options[i];
+            break;
+        }
+    }
     console.log(nextCategory);
     setTimeout(()=>{
         nextCategory.click();
@@ -369,7 +379,7 @@ function addNewAccordion() {
 
     saveAccordionIcon.classList.add('save-accordion', 'fas', 'fa-check-to-slot');
     saveAccordionIcon.addEventListener('click', ()=>{
-        saveAccordion(category,accordionTitle.value, accordionTextArea.value);
+        saveAccordion(accordionContainer,category,accordionTitle.value, accordionTextArea.value);
     });
 
     accordionTitle.placeholder = 'Title...';
@@ -412,7 +422,7 @@ function addNewAccordion() {
 
 }
 
-function saveAccordion(category, titleValue, contentValue) {
+function saveAccordion(container, category, titleValue, contentValue) {
     if (titleValue !== '' && contentValue !== '') {
         fetch('/save-accordion', {
             method: 'POST',
@@ -426,6 +436,12 @@ function saveAccordion(category, titleValue, contentValue) {
             })
         })
         .then(response => response.text())
+        setTimeout(()=>{
+            container.style.border = '2px solid #0e0';
+        },300);
+        setTimeout(()=>{
+            container.style.border = '2px solid white';
+        },1000);
     } else {
         alert("Can't save without content");
     }

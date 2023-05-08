@@ -419,6 +419,10 @@ header {
   margin-top: 15px;
 }
 
+.accordion-container-saved {
+  border: 2px solid #0e0;
+}
+
 .accordion {
   background-color: #ffffff10;
   backdrop-filter: blur(2px);
