@@ -41,10 +41,14 @@ def delete_data(category, title_value, content_value):
     with open(data_file_path, 'w') as f:
         json.dump(existing_data, f, indent=2)
 
-def remove_category():
+def remove_category(category):
     data_file_path = os.path.join(os.path.dirname(__file__), 'data', 'data.json')
     with open(data_file_path, 'r') as f:
         existing_data = json.load(f)
+    if category in existing_data:
+        del existing_data[category]
+    with open(data_file_path, 'w') as f:
+        json.dump(existing_data, f, indent=2)
 
     
 
@@ -80,3 +84,4 @@ def delete_category():
 if __name__ == '__main__':
     app.run(debug=True)
     #append_data('Differential Equations','Data Link Layer','Frames')
+    #remove_category('New Option')

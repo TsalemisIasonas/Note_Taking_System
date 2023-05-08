@@ -305,7 +305,7 @@ function deleteAccordion(icon,titleValue,contentValue) {
 
 function deleteCategory(icon,category) {
     const container = icon.closest('li');
-    console.log(container);
+    let accordions = document.querySelectorAll(`[data-category-notes="${category}"]`);
     fetch('/delete-category', {
         method: 'POST',
         headers: {
@@ -319,6 +319,10 @@ function deleteCategory(icon,category) {
     container.classList.add('fade-out');
     setTimeout(() => {
         container.parentNode.removeChild(container);
+        accordions.forEach((accordion) => {
+            accordion.classList.add('fade-out');
+        })
+        accordions[0].parentNode.removeChild(accordions);
     }, 200);
 }
 
