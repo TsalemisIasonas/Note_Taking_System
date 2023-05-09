@@ -277,6 +277,11 @@ function checkPanelClick(event) {
     if (event.target.classList.contains('accordion-input')) {
         event.target.parentNode.nextElementSibling.style.display = 'block';
     }
+    if (event.target.classList.contains('save-accordion')) {
+        event.target.parentNode.style.display = 'block';
+        event.target.parentNode.parentNode.querySelector('.accordion').classList.add('active');
+        
+    }
 
 }
 
@@ -393,7 +398,9 @@ function addNewAccordion() {
 
     saveAccordionIcon.classList.add('save-accordion', 'fas', 'fa-check-to-slot');
     saveAccordionIcon.addEventListener('click', ()=>{
+        checkPanelClick(saveAccordionIcon);
         saveAccordion(accordionContainer,category,accordionTitle.value, accordionTextArea.value);
+        
     });
 
     accordionTitle.placeholder = 'Title...';
