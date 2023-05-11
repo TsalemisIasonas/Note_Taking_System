@@ -262,6 +262,7 @@ document.querySelectorAll('a[data-category]').forEach(a => a.addEventListener('c
 
 
 function checkPanelClick(event) {
+    console.log(event.classList);
     if (event.target.classList.contains("accordion")) { // Check if the clicked element is an accordion
         document.querySelectorAll('.panel').forEach(panel => panel.style.display = 'none');
         showPanel(event.target);
