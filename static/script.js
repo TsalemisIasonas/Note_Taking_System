@@ -399,7 +399,7 @@ function addNewAccordion() {
 
     saveAccordionIcon.classList.add('save-accordion', 'fas', 'fa-check-to-slot');
     saveAccordionIcon.addEventListener('click', ()=>{
-        checkPanelClick(saveAccordionIcon);
+        //checkPanelClick(saveAccordionIcon);
         saveAccordion(accordionContainer,category,accordionTitle.value, accordionTextArea.value);
         
     });
