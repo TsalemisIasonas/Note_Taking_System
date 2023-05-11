@@ -277,11 +277,11 @@ function checkPanelClick(event) {
     if (event.target.classList.contains('accordion-input')) {
         event.target.parentNode.nextElementSibling.style.display = 'block';
     }
-    if (event.target.classList.contains('save-accordion')) {
-        event.target.parentNode.style.display = 'block';
-        event.target.parentNode.parentNode.querySelector('.accordion').classList.add('active');
+    // if (event.target.classList.contains('save-accordion')) {
+    //     event.target.parentNode.style.display = 'block';
+    //     event.target.parentNode.parentNode.querySelector('.accordion').classList.add('active');
         
-    }
+    // }
 
 }
 
