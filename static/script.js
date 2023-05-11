@@ -262,7 +262,6 @@ document.querySelectorAll('a[data-category]').forEach(a => a.addEventListener('c
 
 
 function checkPanelClick(event) {
-    console.log(event.classList);
     if (event.target.classList.contains("accordion")) { // Check if the clicked element is an accordion
         document.querySelectorAll('.panel').forEach(panel => panel.style.display = 'none');
         showPanel(event.target);
@@ -278,11 +277,6 @@ function checkPanelClick(event) {
     if (event.target.classList.contains('accordion-input')) {
         event.target.parentNode.nextElementSibling.style.display = 'block';
     }
-    // if (event.target.classList.contains('save-accordion')) {
-    //     event.target.parentNode.style.display = 'block';
-    //     event.target.parentNode.parentNode.querySelector('.accordion').classList.add('active');
-        
-    // }
 
 }
 
@@ -399,7 +393,9 @@ function addNewAccordion() {
 
     saveAccordionIcon.classList.add('save-accordion', 'fas', 'fa-check-to-slot');
     saveAccordionIcon.addEventListener('click', ()=>{
-        //checkPanelClick(saveAccordionIcon);
+            saveAccordionIconparentNode.style.display = 'block';
+            saveAccordionIcon.parentNode.parentNode.querySelector('.accordion').classList.add('active');
+
         saveAccordion(accordionContainer,category,accordionTitle.value, accordionTextArea.value);
         
     });
