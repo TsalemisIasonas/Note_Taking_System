@@ -1,0 +1,8 @@
+Value Editing, in category name and in accordions
+
+Fix the classList +,- toggle issue
+
+Check the order in which the accordions are presented
+
+The saveAccordionIcon overlaps with the accordionTextArea and when I try to write 
+the text appears under it

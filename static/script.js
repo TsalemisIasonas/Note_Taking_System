@@ -272,6 +272,7 @@ function checkPanelClick(event) {
     }
     if (event.target.classList.contains('panel-content')) {
         event.target.parentNode.style.display = 'block';
+        // IT SAYS NULL FOR NEXTELEMENT
         event.target.parentNode.nextElementSibling.classList.add('active'); // if user clicks on textArea the accordion remains active
     }
     if (event.target.classList.contains('accordion-input')) {
