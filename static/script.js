@@ -289,7 +289,7 @@ function showPanel(element) {
     let panel = element.nextElementSibling;
     hidePanel(element);
     if (element.classList.contains('active')) {
-        element.classList.remove('active');
+        element.classList.remove('active'); 
         panel.style.display = "none";
     }
     else {
