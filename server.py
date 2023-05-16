@@ -6,23 +6,11 @@ import json,os
 
 app = Flask(__name__)
 
-def replace_newlines(data_file_path):
-    with open(data_file_path, "r") as f:
-        data = json.load(f)
 
-    # Convert all "\n\n" to "\n"
-    json_str = json.dumps(data)
-    json_str = json_str.replace("\\n\\n", "\\n")
-    data = json.loads(json_str)
-
-    # Overwrite the original file with the updated data
-    with open(data_file_path, "w") as f:
-        json.dump(data, f)
 
 @app.route('/')
 def index():
     data_path = os.path.join(os.path.dirname(__file__), 'data', 'data.json') 
-    replace_newlines(data_path)
     with open(data_path,'r') as filename:
         data = json.load(filename)
     return render_template('app.html',data = data)
