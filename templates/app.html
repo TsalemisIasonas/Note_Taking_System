@@ -108,7 +108,7 @@
     <script src="../static/script.js"></script>
     <script>
         var jsonString = '{{data | tojson}}';
-        var sanitizedJsonString = jsonString.replace(/\n/g, '<br>').replace(/\r/g, '<hr>');
+        var sanitizedJsonString = jsonString.replace(/\n/g, '<br>');
         var jsonData = JSON.parse(sanitizedJsonString);        
     </script>
 </body>
