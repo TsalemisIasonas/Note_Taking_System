@@ -84,6 +84,6 @@ def delete_category():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
     #append_data('Differential Equations','Data Link Layer','Frames')
     #remove_category('New Option')
